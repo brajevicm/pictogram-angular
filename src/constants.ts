@@ -6,10 +6,10 @@ export const AUTH = 'auth';
 export const REGISTER = 'auth/register';
 
 export const USERS = 'users';
-export const USER = 'user/';
+export const USER = 'users/';
 
 export const POSTS = 'posts';
-export const POST = 'post/';
+export const POST = 'posts/';
 
 export const COMMENTS = 'comments';
-export const COMMENT = 'comment/';
+export const COMMENT = 'comments/';

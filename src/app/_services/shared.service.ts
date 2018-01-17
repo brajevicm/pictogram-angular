@@ -37,11 +37,11 @@ export class SharedService {
   }
 
   public getToken(): string {
-    return JSON.parse(localStorage.getItem(TOKEN));
+    return localStorage.getItem(TOKEN).replace(/['"]+/g, '');
   }
 
   public setToken(token: string): void {
-    localStorage.setItem(TOKEN, JSON.stringify({token}));
+    localStorage.setItem(TOKEN, JSON.stringify(token));
   }
 
   public hasToken(): boolean {

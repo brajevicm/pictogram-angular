@@ -3,6 +3,8 @@ import { humanizeBytes, UploadFile, UploadInput, UploadOutput } from 'ngx-upload
 import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
 import { PostService } from '../_services/post.service';
+import {API_URL, POSTS, TOKEN} from '../../constants';
+import {SharedService} from '../_services/shared.service';
 
 @Component({
   selector: 'upload',
@@ -21,6 +23,7 @@ export class UploadComponent implements OnInit {
 
   constructor(private _postService: PostService,
               private _alertService: AlertService,
+              private _sharedService: SharedService,
               private _router: Router) {
     this.files = []; // local uploading files array
     this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
@@ -64,13 +67,17 @@ export class UploadComponent implements OnInit {
   startUpload(): void {  // manually start uploading
     const event: UploadInput = {
       type: 'uploadAll',
-      url: 'http://127.0.0.1:80/koolio-api/api/posts/add.php',
+      url: API_URL + POSTS,
       method: 'POST',
-      headers: {token: localStorage.getItem('isLoggedIn')},
-      data: {title: this.model.title},
+      headers: {'Authorization': 'Bearer ' + this._sharedService.getToken()},
+      data: {
+        title: this.model.title,
+        description: 'test'
+      },
       concurrency: 1
     };
 
+    console.log(event);
     this.uploadInput.emit(event);
     this.loading = true;
   }
