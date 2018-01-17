@@ -6,6 +6,7 @@ import { PostService } from '../_services/post.service';
 import {API_URL, POSTS, TOKEN} from '../../constants';
 import {SharedService} from '../_services/shared.service';
 
+
 @Component({
   selector: 'upload',
   templateUrl: './upload.component.html',
@@ -68,6 +69,7 @@ export class UploadComponent implements OnInit {
     const event: UploadInput = {
       type: 'uploadAll',
       url: API_URL + POSTS,
+
       method: 'POST',
       headers: {'Authorization': 'Bearer ' + this._sharedService.getToken()},
       data: {

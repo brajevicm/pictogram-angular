@@ -1,3 +1,4 @@
+/*
 .glyphicon-custom {
   font-size: 25px;
   color: white;
@@ -55,7 +56,7 @@ img {
   -ms-filter: blur(25px);
   filter: blur(25px);
   margin-left: -100px;
-  /*margin-top: -200px;*/
+  !*margin-top: -200px;*!
   min-width: 130%;
 }
 
@@ -71,9 +72,25 @@ img {
   height: 120px;
   -webkit-border-radius: 5%;
   -moz-border-radius: 5%;
-  border-radius: 5%;
+  border-radius: 100%;
   border: 5px solid rgba(255, 255, 255, 0.5);
+  background-image: url("../../assets/images/avatar.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  max-width:100%;
+  max-height:100%;
+
+  overflow: hidden;
 }
+
+.card.hovercard .useravatar img:before {
+  content: " ";
+  font-size: 1000px;
+  max-width:100%;
+  max-height:100%;
+
+}
+
 
 .card.hovercard .card-info {
   position: absolute;
@@ -166,12 +183,12 @@ li {
   margin-right: 10px;
 }
 
-/**
+!**
  * Oscuro: #283035
  * Azul: #03658c
  * Detalle: #c7cacb
  * Fondo: #dee1e3
- ----------------------------------*/
+ ----------------------------------*!
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -203,42 +220,42 @@ ul {
   position: relative;
 }
 
-/*.reply-list:before, .reply-list:after {*/
-/*display: none;*/
-/*}*/
+!*.reply-list:before, .reply-list:after {*!
+!*display: none;*!
+!*}*!
 
-/*.reply-list li:before {*/
-/*content: '';*/
-/*width: 60px;*/
-/*height: 2px;*/
-/*position: absolute;*/
-/*top: 25px;*/
-/*left: -55px;*/
-/*}*/
+!*.reply-list li:before {*!
+!*content: '';*!
+!*width: 60px;*!
+!*height: 2px;*!
+!*position: absolute;*!
+!*top: 25px;*!
+!*left: -55px;*!
+!*}*!
 
-/*.comments-list li {*/
-/*margin-bottom: 15px;*/
-/*display: block;*/
-/*position: relative;*/
-/*}*/
+!*.comments-list li {*!
+!*margin-bottom: 15px;*!
+!*display: block;*!
+!*position: relative;*!
+!*}*!
 
-/*.comments-list li:after {*/
-/*content: '';*/
-/*display: block;*/
-/*clear: both;*/
-/*height: 0;*/
-/*width: 0;*/
-/*}*/
+!*.comments-list li:after {*!
+!*content: '';*!
+!*display: block;*!
+!*clear: both;*!
+!*height: 0;*!
+!*width: 0;*!
+!*}*!
 
-/*.reply-list {*/
-/*padding-left: 88px;*/
-/*clear: both;*/
-/*margin-top: 15px;*/
-/*}*/
+!*.reply-list {*!
+!*padding-left: 88px;*!
+!*clear: both;*!
+!*margin-top: 15px;*!
+!*}*!
 
-/**
+!**
  * Avatar
- ---------------------------*/
+ ---------------------------*!
 .comments-list .comment-avatar {
   width: 65px;
   height: 65px;
@@ -315,17 +332,17 @@ ul {
   border-radius: 4px 4px 0 0;
 }
 
-/*.comment-box .comment-head i {*/
-/*float: right;*/
-/*margin-left: 14px;*/
-/*position: relative;*/
-/*top: 2px;*/
-/*color: #A6A6A6;*/
-/*cursor: pointer;*/
-/*-webkit-transition: color 0.3s ease;*/
-/*-o-transition: color 0.3s ease;*/
-/*transition: color 0.3s ease;*/
-/*}*/
+!*.comment-box .comment-head i {*!
+!*float: right;*!
+!*margin-left: 14px;*!
+!*position: relative;*!
+!*top: 2px;*!
+!*color: #A6A6A6;*!
+!*cursor: pointer;*!
+!*-webkit-transition: color 0.3s ease;*!
+!*-o-transition: color 0.3s ease;*!
+!*transition: color 0.3s ease;*!
+!*}*!
 
 .comment-box .comment-head i:hover {
   color: #c22025;
@@ -340,7 +357,7 @@ ul {
 
 .comment-box .comment-head span {
   float: left;
-  /*color: #999;*/
+  !*color: #999;*!
   font-size: 13px;
   position: relative;
   top: 1px;
@@ -358,7 +375,7 @@ ul {
   background: #FFF;
   padding: 12px;
   font-size: 15px;
-  /*color: #595959;*/
+  !*color: #595959;*!
   -webkit-border-radius: 0 0 4px 4px;
   -moz-border-radius: 0 0 4px 4px;
   border-radius: 0 0 4px 4px;
@@ -381,9 +398,9 @@ ul {
   border-radius: 3px;
 }
 
-/** =====================
+!** =====================
  * Responsive
- ========================*/
+ ========================*!
 @media only screen and (max-width: 766px) {
   .comments-container {
     width: 480px;
@@ -396,6 +413,129 @@ ul {
   .reply-list .comment-box {
     width: 320px;
   }
+}
+
+*/
+
+
+/*
+-------------------------*/
+/***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+.container{
+  background: #fff;
+
+
+  width:100%;
+}
+
+.glyphicon {
+
+}
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 50px 0 10px 0;
+  /*background: #000;*/
+}
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  -webkit-border-radius: 100% !important;
+  -moz-border-radius: 100% !important;
+  border-radius: 100% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+
+.profile-usermenu {
+  margin-top: 30px;
+}
+
+.profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 30px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.profile-usermenu ul li.active {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+
+/* Profile Content */
+.profile-content {
+  padding: 20px;
+  background: #fff;
+  min-height: 460px;
 }
 
 

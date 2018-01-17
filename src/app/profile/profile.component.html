@@ -1,10 +1,11 @@
-<div class="container" *ngIf="user">
+<!--
+<div class="container" >&lt;!&ndash;*ngIf="user"&ndash;&gt;
   <div class="col-lg-12 col-sm-12">
     <div class="card hovercard">
       <div class="card-background"></div>
       <div class="useravatar">
         <img
-          [src]="user.image">
+          src="../../assets/images/profile.jpg"> &lt;!&ndash;user.image&ndash;&gt;
       </div>
       <div class="card-info"><span class="card-title">{{user.username}}</span>
       </div>
@@ -35,7 +36,7 @@
         <div class="tab-pane fade in active" id="tab1">
           <div *ngIf="posts" class="shrink content-spacing">
             <div *ngFor="let post of posts">
-              <!-- Title -->
+              &lt;!&ndash; Title &ndash;&gt;
               <header>
                 <h2>
                   <a [routerLink]="['/post', post.id]">
@@ -54,11 +55,11 @@
                        class="img-responsive img-post">
                 </a>
               </div>
-              <!-- Spacing -->
+              &lt;!&ndash; Spacing &ndash;&gt;
               <div>
                 <p></p>
               </div>
-              <!-- Upvote, Downvote, Comment -->
+              &lt;!&ndash; Upvote, Downvote, Comment &ndash;&gt;
               <div class="content-spacing"></div>
             </div>
           </div>
@@ -67,7 +68,7 @@
         <div class="tab-pane fade in" id="tab2">
           <div *ngIf="upvotedPosts" class="shrink content-spacing">
             <div *ngFor="let upvotedPost of upvotedPosts">
-              <!-- Title -->
+              &lt;!&ndash; Title &ndash;&gt;
               <header>
                 <h2>
                   <a [routerLink]="['/post', upvotedPost.id]">
@@ -86,11 +87,11 @@
                        class="img-responsive img-post">
                 </a>
               </div>
-              <!-- Spacing -->
+              &lt;!&ndash; Spacing &ndash;&gt;
               <div>
                 <p></p>
               </div>
-              <!-- Upvote, Downvote, Comment -->
+              &lt;!&ndash; Upvote, Downvote, Comment &ndash;&gt;
               <div class="content-spacing"></div>
             </div>
           </div>
@@ -117,13 +118,13 @@
                               {{comment.post}}
                             </a>
                           </h6>
-                          <!--<a *ngIf="upvoted" class="right glyphicon-position">-->
-                          <!--<span class="glyphicon glyphicon-heart glyphicon-custom upvoted"></span>-->
-                          <!--</a>-->
-                          <!--<a class="right glyphicon-position" *ngIf="!upvoted"-->
-                          <!--(click)="upvote()">-->
-                          <!--<span class="glyphicon glyphicon-heart glyphicon-custom"></span>-->
-                          <!--</a>-->
+                          &lt;!&ndash;<a *ngIf="upvoted" class="right glyphicon-position">&ndash;&gt;
+                          &lt;!&ndash;<span class="glyphicon glyphicon-heart glyphicon-custom upvoted"></span>&ndash;&gt;
+                          &lt;!&ndash;</a>&ndash;&gt;
+                          &lt;!&ndash;<a class="right glyphicon-position" *ngIf="!upvoted"&ndash;&gt;
+                          &lt;!&ndash;(click)="upvote()">&ndash;&gt;
+                          &lt;!&ndash;<span class="glyphicon glyphicon-heart glyphicon-custom"></span>&ndash;&gt;
+                          &lt;!&ndash;</a>&ndash;&gt;
                           <span class="date">{{comment.timestamp | date}}</span>
                         </div>
                         <div class="comment-content">
@@ -142,3 +143,79 @@
   </div>
 
 </div>
+-->
+
+<!--
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+-->
+
+<div class="container">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+          <img src="../../assets/images/profile.jpg" class="img-responsive" alt="">
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            Marcus Doe
+          </div>
+          <div class="profile-usertitle-job">
+            Developer
+          </div>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+        <!-- SIDEBAR BUTTONS -->
+        <div class="profile-userbuttons">
+          <button type="button" class="btn btn-success btn-sm">Follow</button>
+        </div>
+        <!-- END SIDEBAR BUTTONS -->
+        <!-- SIDEBAR MENU -->
+        <div class="profile-usermenu">
+          <ul class="nav">
+            <li class="active">
+              <a href="#">
+                <i class="glyphicon glyphicon-home"></i>
+                Overview </a>
+            </li>
+            <!--surround with if user then show-->
+            <li>
+              <a href="#">
+                <i class="glyphicon glyphicon-user"></i>
+                Account Settings </a>
+            </li>
+
+            <li>
+              <a href="#" target="_blank">
+                <i class="glyphicon glyphicon-paste"></i>
+                Posts </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <i class="glyphicon glyphicon-heart"></i>
+                Likes </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="glyphicon glyphicon-comment"></i>
+                Comments </a>
+            </li>
+          </ul>
+        </div>
+        <!-- END MENU -->
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="profile-content">
+        Some user related content goes here...
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
