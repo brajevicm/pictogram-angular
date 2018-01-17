@@ -29,15 +29,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private _sharedService: SharedService,
               private _alertService: AlertService,
               private  _authService: AuthService) {
-    this.currentUser = JSON.parse(_sharedService.getToken());
+   // this.currentUser = JSON.parse(_sharedService.getToken());
   }
 
   ngOnInit() {
     if (this.currentUser) {
-      this.getUser();
-      this.getPosts();
-      this.getComments();
-      this.getUpvotedPosts();
+      //this.getUser();
+      //this.getPosts();
+      //this.getComments();
+      //this.getUpvotedPosts();
     }
   }
 

@@ -3,6 +3,7 @@ import { humanizeBytes, UploadFile, UploadInput, UploadOutput } from 'ngx-upload
 import { Router } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
 import { PostService } from '../_services/post.service';
+import {POSTS} from '../../constants';
 
 @Component({
   selector: 'upload',
@@ -64,7 +65,7 @@ export class UploadComponent implements OnInit {
   startUpload(): void {  // manually start uploading
     const event: UploadInput = {
       type: 'uploadAll',
-      url: 'http://127.0.0.1:80/koolio-api/api/posts/add.php',
+      url: POSTS + '/add',
       method: 'POST',
       headers: {token: localStorage.getItem('isLoggedIn')},
       data: {title: this.model.title},
