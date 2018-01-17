@@ -34,10 +34,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.currentUser) {
-      //this.getUser();
-      //this.getPosts();
-      //this.getComments();
-      //this.getUpvotedPosts();
+      // this.getUser();
+      // this.getPosts();
+      // this.getComments();
+      // this.getUpvotedPosts();
     }
   }
 

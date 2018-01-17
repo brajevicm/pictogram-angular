@@ -10,7 +10,7 @@ import { UploadComponent } from './upload/upload.component';
     RouterModule.forRoot(
       [
         {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-        {path: 'register', component: RegisterComponent},
+        {path: 'register', component: RegisterComponent },
         {path: 'upload', component: UploadComponent, canActivate: [AuthGuard]},
         {path: '', component: PostsComponent}
       ]
