@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this._authService.login(this.model.username, this.model.password)
       .subscribe(
         data => {
-          location.reload();
+          // location.reload();
         },
         error => {
           this._alertService.error(error);

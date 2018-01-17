@@ -3,30 +3,30 @@
   <h2>Register</h2>
   <form class="jumbotron" name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="firstname">First Name</label>
-      <input type="text" class="form-control" name="firstname" [(ngModel)]="model.firstname" #firstname="ngModel"
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel"
              required minlength="2"/>
-      <div *ngIf="f.submitted && !firstname.valid" class="help-block">First Name must have
+      <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name must have
         at least 2
         characters.
       </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <label for="lastname">Last Name</label>
-      <input type="text" class="form-control" name="lastname" [(ngModel)]="model.lastname" #lastname="ngModel"
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel"
              required minlength="2"/>
-      <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last name must have at least 2 characters.
+      <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last name must have at least 2 characters.
       </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel"
+      <input id="username" type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel"
              required minlength="3"/>
       <div *ngIf="f.submitted && !username.valid" class="help-block">Username must have at least 3 characters.
       </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-      <label for="password">Password</label>
+      <label id="password" for="password">Password</label>
       <input type="password" class="form-control" name="password" [(ngModel)]="model.password"
              #password="ngModel"
              required minlength="8"/>
@@ -36,7 +36,7 @@
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !files }">
       <div class="input-group">
         <label for="files">User Image</label>
-        <input name="files" type="file" class="form-control"
+        <input id="files" name="files" type="file" class="form-control"
                accept="image/png, image/jpeg, image/gif"
                ngFileSelect
                (uploadOutput)="onUploadOutput($event)"

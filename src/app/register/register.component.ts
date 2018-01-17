@@ -5,6 +5,7 @@ import { AlertService } from '../_services/alert.service';
 import { humanizeBytes, UploadFile, UploadInput, UploadOutput } from 'ngx-uploader';
 import { AuthService } from '../_services/auth.service';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import {API_URL, REGISTER} from '../../constants';
 
 @Component({
   selector: 'register',
@@ -67,13 +68,14 @@ export class RegisterComponent implements OnInit {
   startUpload(): void {  // manually start uploading
     const event: UploadInput = {
       type: 'uploadAll',
-      url: 'http://127.0.0.1:80/koolio-api/api/users/register.php',
+      url: API_URL + REGISTER,
       method: 'POST',
       data: {
         username: this.model.username,
         password: this.model.password,
-        firstname: this.model.firstName,
-        lastname: this.model.lastName
+        firstName: this.model.firstName,
+        lastName: this.model.lastName,
+        email: 'milos@mail.com'
       },
       concurrency: 1
     };
