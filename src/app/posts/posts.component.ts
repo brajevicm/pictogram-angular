@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { PostService } from '../_services/post.service';
-import { IPost } from '../_models/post';
-import { IUser } from '../_models/user';
-import { CommentService } from '../_services/comment.service';
-import { AlertService } from '../_services/alert.service';
-import { UserService } from '../_services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SharedService } from '../_services/shared.service';
-import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../_services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {PostService} from '../_services/post.service';
+import {IPost} from '../_models/post';
+import {IUser} from '../_models/user';
+import {CommentService} from '../_services/comment.service';
+import {AlertService} from '../_services/alert.service';
+import {UserService} from '../_services/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../_services/shared.service';
+import {Observable} from 'rxjs/Observable';
+import {AuthService} from '../_services/auth.service';
 
 @Component({
   selector: 'pages',
@@ -33,10 +33,11 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAllTopCommentedPosts();
+    this.loadFreshPosts();
+    // this.loadAllTopCommentedPosts();
     // if (this._router.url == '/hot') {
-    this.initUser();
-    this.initHotPosts();
+    // this.initUser();
+    // this.initHotPosts();
     // }
     // } else if (this._router.url == '/trending') {
     //     this.initUser();
@@ -88,10 +89,10 @@ export class PostsComponent implements OnInit {
           return {
             id: p.id,
             user_id: p.user_id,
-            user: p.user,
+            user: p.username,
             flag_id: p.flag_id,
             title: p.title,
-            image: p.image,
+            image: p.postImage,
             timestamp: p.timestamp,
             upvotes: p.upvotes,
             comments: p.comments,
@@ -110,11 +111,15 @@ export class PostsComponent implements OnInit {
 
 
   private loadTrendingPosts() {
-    this._postService.getTrendingPosts()
+    this._postService.getFreshPosts()
       .subscribe(posts => {
-        this.posts = posts;
-      })
-    ;
+        posts.map(p => {
+          return {
+            title: p.title,
+            postImage: p.postImage
+          };
+        }).forEach(item => this.posts.push(item));
+      });
   }
 
   private loadFreshPosts() {

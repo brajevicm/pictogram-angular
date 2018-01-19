@@ -115,7 +115,7 @@ export class RegisterComponent implements OnInit {
     //     this.model.password,
     //     this.model.firstName,
     //     this.model.lastName,
-    //     this.model.image
+    //     this.model.postImage
     // )
     //     .subscribe(
     //         data => {

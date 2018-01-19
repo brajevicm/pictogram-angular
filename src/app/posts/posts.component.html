@@ -1,6 +1,6 @@
 <script src="posts.component.ts"></script>
 <div class="container">
-  <div class="container-fluid" *ngIf="(currentUser && user) || !currentUser">
+  <div class="container-fluid" *ngIf="(currentUser && username) || !currentUser">
     <div class="row">
       <div class="col-md-12">
         <div class="col-md-7">
@@ -21,10 +21,10 @@
                     </a>
                   </h2>
                 </header>
-                <!-- Content image -->
+                <!-- Content postImage -->
                 <div>
                   <a [routerLink]="['/post', post.id]">
-                    <img [src]="post.image" [title]="post.title">
+                    <img [src]="post.postImage" [title]="post.title">
                   </a>
                 </div>
                 <!-- Spacing -->
@@ -44,7 +44,7 @@
                   <a *ngIf="!post.isActiveComment" [routerLink]="['/post', post.id]" class="mr-10">{{post.comments}}
                     ·
                     comments</a>
-                  <a *ngIf="currentUser && user.role == 'admin' && post.reports > 1">{{post.reports}}
+                  <a *ngIf="currentUser && username.role == 'admin' && post.reports > 1">{{post.reports}}
                     ·
                     reports</a>
                 </p>
@@ -85,23 +85,23 @@
                         </a>
                       </li>
                       <li *ngIf="currentUser">
-                        <a *ngIf="!post.isActiveRemove && user.role == 'admin'"
+                        <a *ngIf="!post.isActiveRemove && username.role == 'admin'"
                            (click)="post.isActiveRemove = !post.isActiveRemove; removePost(post.id)"
                            title="Click here to remove this post.">
                           <span class=" glyphicon glyphicon-remove glyphicon-custom"></span>
                         </a>
-                        <a *ngIf="post.isActiveRemove && user.role == 'admin'"
+                        <a *ngIf="post.isActiveRemove && username.role == 'admin'"
                            title="You have already removed this post.">
                           <span class="glyphicon glyphicon-remove glyphicon-custom upvoted"></span>
                         </a>
                       </li>
                       <li *ngIf="currentUser">
-                        <a *ngIf="post.reported == '0' && !post.isActiveReport && user.role == 'user'"
+                        <a *ngIf="post.reported == '0' && !post.isActiveReport && username.role == 'username'"
                            (click)="post.isActiveReport = !post.isActiveReport; reportPost(post.id)"
                            title="Click here to report this post.">
                           <span class=" glyphicon glyphicon-exclamation-sign glyphicon-custom"></span>
                         </a>
-                        <a *ngIf="(post.isActiveReport || post.reported == '1') && user.role == 'user'"
+                        <a *ngIf="(post.isActiveReport || post.reported == '1') && username.role == 'username'"
                            title="You have already reported this post.">
                           <span class="glyphicon glyphicon-exclamation-sign glyphicon-custom upvoted"></span>
                         </a>
@@ -136,7 +136,7 @@
             <h2>Top Commented</h2>
             <div class="item" *ngFor="let post of topCommented">
               <a [routerLink]="['/post', post.id]">
-                <img [src]="post.image" [title]="post.title">
+                <img [src]="post.postImage" [title]="post.title">
               </a>
             </div>
           </div>

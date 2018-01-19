@@ -23,8 +23,8 @@ export class SharedService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    if (localStorage.getItem(TOKEN)) {
-      headers.append('Authorization', 'Bearer ' + localStorage.getItem(TOKEN));
+    if (this.hasToken()) {
+      headers.append('Authorization', 'Bearer ' + this.getToken());
     }
 
     return headers;

@@ -83,7 +83,7 @@ export class PostService {
     const url = API_URL + POSTS;
 
     return this._http.get(url, options)
-      .map((response: Response) => <IPost[]> response.json().posts)
+      .map((response: Response) => <IPost[]> response.json()._embedded.posts)
       .catch(this._sharedService.localError);
   }
 
