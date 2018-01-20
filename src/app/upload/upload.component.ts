@@ -68,7 +68,7 @@ export class UploadComponent implements OnInit {
   startUpload(): void {  // manually start uploading
     const event: UploadInput = {
       type: 'uploadAll',
-      url: API_URL + POSTS,
+      url: API_URL + POSTS + '/add',
 
       method: 'POST',
       headers: {'Authorization': 'Bearer ' + this._sharedService.getToken()},
