@@ -22,7 +22,7 @@ export class PostComponent implements OnInit, OnDestroy {
   currentUser: IUser;
   isLoggedIn: Observable<boolean>;
   post: IPost;
-  comments: IComment[];
+  comments: IComment[] = [];
   upvoted = false;
   commentText: string;
   loading = false;
@@ -49,6 +49,7 @@ export class PostComponent implements OnInit, OnDestroy {
         const id = +params['id'];
         this.getPost(id);
         this.getComments(id);
+
       });
   }
 
@@ -81,7 +82,7 @@ export class PostComponent implements OnInit, OnDestroy {
   getComments(id: number) {
     this._commentService.getPostComments(id)
       .subscribe(
-        comments => this.comments = comments,
+        content => this.comments = content,
         error => this._alertService.error(error)
       );
   }

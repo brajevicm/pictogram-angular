@@ -60,25 +60,51 @@ export class PostService {
 
 
 // @TODO parameter query
-  getTrendingPosts(): Observable<IPost[]> {
-    const options = this._sharedService.getOptions();
-    const url = API_URL + POSTS;
+  getTrendingPosts(offset: number): Observable<IPost[]> {
+    if (this._sharedService.isUserLoggedIn()) {
+      const type = '?type=trending&page=' +  offset + '&size=3';
+      const options = this._sharedService.getOptions();
+      const url = API_URL + POSTS + type;
 
-    return this._http.get(url, options)
-      .map((response: Response) => <IPost[]> response.json().posts)
-      .catch(this._sharedService.localError);
+      return this._http.get(url, options)
+        .map((response: Response) => <IPost[]> response.json().content)
+        // .do(data => console.log('All: ' + JSON.stringify(data)))
+        .catch(this._sharedService.localError);
+    } else {
+      const type = '?type=trending&page=' +  offset + '&size=3';
+      const options = this._sharedService.getOptions();
+      const url = API_URL + POSTS + type;
+
+      return this._http.get(url, options)
+        .map((response: Response) => <IPost[]> response.json().content)
+        // .do(data => console.log('All: ' + JSON.stringify(data)))
+        .catch(this._sharedService.localError);
+    }
   }
 
 // @TODO parameter query
-  getFreshPosts(): Observable<IPost[]> {
-    const options = this._sharedService.getOptions();
-    const url = API_URL + POSTS + '?type=fresh&page=0&size=3';
+  getFreshPosts(offset: number): Observable<IPost[]> {
+    if (this._sharedService.isUserLoggedIn()) {
+      const type = '?type=fresh&page=' +  offset + '&size=3';
+      const options = this._sharedService.getOptions();
+      const url = API_URL + POSTS + type;
 
-    return this._http.get(url, options)
-      .map((response: Response) => <IPost[]> response.json()._embedded.posts)
-      .catch(this._sharedService.localError);
+      return this._http.get(url, options)
+        .map((response: Response) => <IPost[]> response.json().content)
+        // .do(data => console.log('All: ' + JSON.stringify(data)))
+        .catch(this._sharedService.localError);
+    } else {
+      const type = '?type=fresh&page=' +  offset + '&size=3';
+      const options = this._sharedService.getOptions();
+      const url = API_URL + POSTS + type;
+
+      return this._http.get(url, options)
+        .map((response: Response) => <IPost[]> response.json().content)
+        // .do(data => console.log('All: ' + JSON.stringify(data)))
+        .catch(this._sharedService.localError);
+    }
   }
-
+  // TODO edit
   getPostsFromUser(id: number): Observable<IPost[]> {
     const options = this._sharedService.getOptions();
     const url = API_URL + USER + id + '/' + POSTS;
@@ -92,7 +118,6 @@ export class PostService {
   getUpvotedPosts(id: number): Observable<IPost[]> {
     const options = this._sharedService.getOptions();
     const url = API_URL + USER + id + '/' + POSTS;
-
     return this._http.get(url, options)
       .map((response: Response) => <IPost[]> response.json().posts)
       .catch(this._sharedService.localError);
@@ -101,18 +126,19 @@ export class PostService {
   // @TODO parameter query
   getTopCommentedPosts(): Observable<IPost[]> {
     const options = this._sharedService.getOptions();
-    const url = API_URL + POSTS;
-
-    return this._http.get(url, options)
+    const type = '?type=trending&page=0&size=3';
+    const url = API_URL + POSTS + type;
+      return this.getTrendingPosts(0);
+    /*return this._http.get(url, options)
       .map((response: Response) => <IPost[]> response.json().posts)
-      .catch(this._sharedService.localError);
+      .catch(this._sharedService.localError);*/
   }
 
   getPost(id: number): Observable<IPost> {
     const options = this._sharedService.getOptions();
     const url = API_URL + POST + id;
 
-    return this._http.post(url, options)
+    return this._http.get(url, options)
       .map((response: Response) => <IPost> response.json())
       .catch(this._sharedService.localError);
   }

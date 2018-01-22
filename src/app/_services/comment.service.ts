@@ -73,10 +73,10 @@ export class CommentService {
   public getPostComments(id: number): Observable<IComment[]> {
     const data = JSON.stringify({post_id: id});
     const options = this._sharedService.getOptions();
-    const url = API_URL + POST + id + '/' + COMMENTS;
+    const url = API_URL + POST + id + '/' + COMMENTS + '?page=0&size=10' ;
 
-    return this._http.post(url, data, options)
-      .map((response: Response) => <IComment[]> response.json().comments)
+    return this._http.get(url, options)
+      .map((response: Response) => <IComment[]> response.json().content)
       .catch(this._sharedService.localError);
   }
 
@@ -85,7 +85,7 @@ export class CommentService {
     const url = API_URL + USER + id + '/' + COMMENTS;
 
     return this._http.get(url, options)
-      .map((response: Response) => <IComment[]> response.json().comments)
+      .map((response: Response) => <IComment[]> response.json().content)
       .catch(this._sharedService.localError);
   }
 }

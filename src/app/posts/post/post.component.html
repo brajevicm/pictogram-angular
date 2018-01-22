@@ -99,18 +99,18 @@
         <div *ngIf="comments">
           <div class="row">
             <div class="comments-container">
-              <ul id="comments-list" class="comments-list" *ngFor="let comment of comments"
-                  [ngClass]="{'is-active': [comment.isActive, comment.isActiveReport, comment.isActiveRemove]}">
+              <ul id="comments-list" class="comments-list" *ngFor="let comment of comments">
+                  <!--[ngClass]="{'is-active': [comment.isActive, comment.isActiveReport, comment.isActiveRemove]}"-->
                 <li>
                   <div class="comment-main-level">
                     <div class="comment-avatar">
-                      <img [src]='comment.avatar' [title]='comment.user'>
+                      <img [src]='' [title]='comment.username'>
                     </div>
                     <div class="comment-box">
                       <div class="comment-head">
                         <h6 class="comment-name">
                           <a>
-                            {{comment.user}}
+                            {{comment.username}}
                           </a>
                         </h6>
                         <div>
@@ -162,12 +162,12 @@
                               class="date">{{comment.reports}}
                                                     ·
                                                     reports</span>
-                        <span class="date">{{comment.timestamp | date}}</span>
+                        <span class="date">{{comment.createdDate | date}}</span>
                         <span *ngIf="comment.isActive" class="date">{{comment.upvotes + 1}} · upvotes</span>
                         <span *ngIf="!comment.isActive" class="date">{{comment.upvotes}} · upvotes</span>
                       </div>
                       <div class="comment-content">
-                        {{comment.text}}
+                        {{comment.description}}
                       </div>
                     </div>
                   </div>

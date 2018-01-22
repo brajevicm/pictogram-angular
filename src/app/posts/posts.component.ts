@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../_services/shared.service';
 import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../_services/auth.service';
+import {PostsRoutingModule} from './posts-routing.module';
 
 @Component({
   selector: 'pages',
@@ -17,7 +18,7 @@ import {AuthService} from '../_services/auth.service';
 })
 export class PostsComponent implements OnInit {
   posts: IPost[] = [];
-  topCommented: IPost[];
+  topCommented: IPost[] = [];
   currentUser: IUser;
   isLoggedIn: Observable<boolean>;
   loading = false;
@@ -28,35 +29,37 @@ export class PostsComponent implements OnInit {
               private _userService: UserService,
               private _commentService: CommentService,
               private _alertService: AlertService,
-              private _authService: AuthService) {
+              private _authService: AuthService
+              ) {
     this.isLoggedIn = this._authService.isLoggedIn();
   }
 
+  // TODO srediti sta se povlaci pri pokretanju
   ngOnInit() {
-    this.loadHotPosts(0);
-    // this.loadAllTopCommentedPosts();
-    // if (this._router.url == '/hot') {
-    // this.initUser();
-    // this.initHotPosts();
-    // }
-    // } else if (this._router.url == '/trending') {
-    //     this.initUser();
-    //     this.loadTrendingPosts();
-    // } else if (this._router.url == '/fresh') {
-    //     this.initUser();
-    //     this.loadFreshPosts();
-    // }
+    // this.loadHotPosts(0);
+    this.loadAllTopCommentedPosts();
+    this.load(this.offset);
   }
-
+  load(offset: number) {
+      const path = window.location.pathname;
+      this.initUser();
+      if (path === '/hot') {
+        this.loadHotPosts(offset);
+      } else if (path === '/trending') {
+        this.loadTrendingPosts(offset);
+      } else if (path === '/fresh') {
+        this.loadFreshPosts(offset);
+      }
+    }
   onScrollDown() {
     this.offset += 1;
-    this.loadHotPosts(this.offset);
+    this.load(this.offset);
   }
 
-  // onScrollUp() {
-  //     this.offset -= 2;
-  //     this.loadHotPosts(this.offset);
-  // }
+   onScrollUp() {
+       this.offset -= 1;
+       this.load(this.offset);
+   }
 
   private initUser() {
     if (this.currentUser) {
@@ -90,7 +93,7 @@ export class PostsComponent implements OnInit {
             id: p.id,
             title: p.title,
             description: p.description,
-            postImage: p.postImage,
+            postImage:  p.postImage,
             createdDate: p.createdDate,
             enabled: p.enabled,
             username: p.username,
@@ -103,24 +106,45 @@ export class PostsComponent implements OnInit {
   }
 
 
-  private loadTrendingPosts() {
-    this._postService.getFreshPosts()
+  private loadTrendingPosts(offset: number) {
+    this._postService.getTrendingPosts(offset)
       .subscribe(posts => {
         posts.map(p => {
           return {
+            id: p.id,
             title: p.title,
-            postImage: p.postImage
+            description: p.description,
+            postImage: p.postImage,
+            createdDate: p.createdDate,
+            enabled: p.enabled,
+            username: p.username,
+            commentsCount: p.commentsCount,
+            upvotesCount: p.upvotesCount
+
           };
         }).forEach(item => this.posts.push(item));
       });
   }
 
-  private loadFreshPosts() {
-    this._postService.getFreshPosts()
+  private loadFreshPosts(offset: number) {
+    this._postService.getFreshPosts(offset)
       .subscribe(posts => {
-        this.posts = posts;
-      })
-    ;
+        posts.map(p => {
+          return {
+            id: p.id,
+            title: p.title,
+            description: p.description,
+            postImage: p.postImage,
+            createdDate: p.createdDate,
+            enabled: p.enabled,
+            username: p.username,
+            commentsCount: p.commentsCount,
+            upvotesCount: p.upvotesCount
+
+          };
+        }).forEach(item => this.posts.push(item));
+        this.posts.reverse();
+      });
   }
 
   private loadAllTopCommentedPosts() {
