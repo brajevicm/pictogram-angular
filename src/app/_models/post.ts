@@ -13,6 +13,11 @@ export interface IPost {
   upvotes?: number;
   comments?: number;
   upvoted?: number;
+  enabled?: boolean;
+  description?: string;
+  createdDate?: number;
+  commentsCount?: number;
+  upvotesCount?: number;
   isActivePost?: boolean;
   isActiveComment?: boolean;
   isActiveCommentBox?: boolean;
@@ -27,15 +32,19 @@ export class Post implements IPost {
   user_id: number;
   username: string;
   flag_id: number;
-  flag: string;
   title: string;
   postImage: string;
   timestamp: string;
   upvotes: number;
   comments: number;
   upvoted: number;
+  enabled: boolean;
+  description: string;
+  createdDate: number;
+  commentsCount: number;
+  upvotesCount: number;
   isActivePost: boolean;
-  isActiveComment: boolean
+  isActiveComment: boolean;
   isActiveCommentBox: boolean;
   isActiveReport: boolean;
   isActiveRemove: boolean;
@@ -43,22 +52,27 @@ export class Post implements IPost {
   reported: number;
 
   constructor(id: number,
-              user_id: number,
-              user: string,
-              flag_id: number,
-              flag: string,
-              title: string,
-              image: string,
-              timestamp: string,
-              upvotes: number,
-              comments: number,
-              upvoted: number,
-              isActive: boolean,
-              isActiveComment: boolean,
-              isActiveCommentBox: boolean,
-              isActiveReport: boolean,
-              isActiveRemove: boolean,
-              reports: number,
-              reported: number) {
+  user_id: number,
+  username: string,
+  flag_id: number,
+  title: string,
+  postImage: string,
+  timestamp: string,
+  upvotes: number,
+  comments: number,
+  upvoted: number,
+  enabled: boolean,
+  description: string,
+  createdDate: number,
+  commentsCount: number,
+  upvotesCount: number,
+  isActivePost: boolean,
+  isActiveComment: boolean,
+  isActiveCommentBox: boolean,
+  isActiveReport: boolean,
+  isActiveRemove: boolean,
+  reports: number,
+  reported: number
+  ) {
   }
 }

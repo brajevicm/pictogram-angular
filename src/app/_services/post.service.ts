@@ -35,32 +35,24 @@ export class PostService {
     }
   }
 
-  // @TODO parameter query
-  // getHotPosts(offset: number): Observable<IPost[]> {
-  //   const options = this._sharedService.getOptions();
-  //   const url = API_URL + POSTS;
-  //
-  //   return this._http.get(url, options)
-  //     .map((response: Response) => <IPost[]> response.json().posts)
-  //     .catch(this._sharedService.localError);
-  // }
+// finished
   getHotPosts(offset: number): Observable<IPost[]> {
     if (this._sharedService.isUserLoggedIn()) {
-      const data = 'offset=' + offset;
+      const type = '?type=hot&page=' +  offset + '&size=3';
       const options = this._sharedService.getOptions();
-      const url = API_URL + POSTS;
+      const url = API_URL + POSTS + type;
 
-      return this._http.post(url, data, options)
-        .map((response: Response) => <IPost[]> response.json().posts)
+      return this._http.get(url, options)
+        .map((response: Response) => <IPost[]> response.json().content)
         // .do(data => console.log('All: ' + JSON.stringify(data)))
         .catch(this._sharedService.localError);
     } else {
-      const data = 'offset=' + offset;
+      const type = '?type=hot&page=' +  offset + '&size=3';
       const options = this._sharedService.getOptions();
-      const url = API_URL + POSTS;
+      const url = API_URL + POSTS + type;
 
-      return this._http.post(url, data, options)
-        .map((response: Response) => <IPost[]> response.json().posts)
+      return this._http.get(url, options)
+        .map((response: Response) => <IPost[]> response.json().content)
         // .do(data => console.log('All: ' + JSON.stringify(data)))
         .catch(this._sharedService.localError);
     }
@@ -80,7 +72,7 @@ export class PostService {
 // @TODO parameter query
   getFreshPosts(): Observable<IPost[]> {
     const options = this._sharedService.getOptions();
-    const url = API_URL + POSTS;
+    const url = API_URL + POSTS + '?type=fresh&page=0&size=3';
 
     return this._http.get(url, options)
       .map((response: Response) => <IPost[]> response.json()._embedded.posts)

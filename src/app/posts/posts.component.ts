@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from '../_services/post.service';
-import {IPost} from '../_models/post';
+import {IPost, Post} from '../_models/post';
 import {IUser} from '../_models/user';
 import {CommentService} from '../_services/comment.service';
 import {AlertService} from '../_services/alert.service';
@@ -16,7 +16,7 @@ import {AuthService} from '../_services/auth.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts: IPost[];
+  posts: IPost[] = [];
   topCommented: IPost[];
   currentUser: IUser;
   isLoggedIn: Observable<boolean>;
@@ -33,7 +33,7 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadFreshPosts();
+    this.loadHotPosts(0);
     // this.loadAllTopCommentedPosts();
     // if (this._router.url == '/hot') {
     // this.initUser();
@@ -49,7 +49,7 @@ export class PostsComponent implements OnInit {
   }
 
   onScrollDown() {
-    this.offset += 4;
+    this.offset += 1;
     this.loadHotPosts(this.offset);
   }
 
@@ -88,22 +88,15 @@ export class PostsComponent implements OnInit {
         posts.map(p => {
           return {
             id: p.id,
-            user_id: p.user_id,
-            user: p.username,
-            flag_id: p.flag_id,
             title: p.title,
-            image: p.postImage,
-            timestamp: p.timestamp,
-            upvotes: p.upvotes,
-            comments: p.comments,
-            upvoted: p.upvoted,
-            isActivePost: p.isActivePost,
-            isActiveComment: p.isActiveComment,
-            isActiveCommentBox: p.isActiveCommentBox,
-            isActiveReport: p.isActiveReport,
-            isActiveRemove: p.isActiveRemove,
-            reports: p.reports,
-            reported: p.reported
+            description: p.description,
+            postImage: p.postImage,
+            createdDate: p.createdDate,
+            enabled: p.enabled,
+            username: p.username,
+            commentsCount: p.commentsCount,
+            upvotesCount: p.upvotesCount
+
           };
         }).forEach(item => this.posts.push(item));
       });

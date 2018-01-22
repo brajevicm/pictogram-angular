@@ -32,10 +32,11 @@ export class SharedService {
 
   public isUserLoggedIn(): boolean {
     const JWT_REGEX_PATTERN = new RegExp(/^[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)?$/);
-
-    return JWT_REGEX_PATTERN.test(this.getToken());
+    if (this.hasToken()) {
+      return JWT_REGEX_PATTERN.test(this.getToken());
+    }
+    return false;
   }
-
   public getToken(): string {
     return localStorage.getItem(TOKEN).replace(/['"]+/g, '');
   }
