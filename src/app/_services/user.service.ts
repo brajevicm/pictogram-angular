@@ -47,7 +47,6 @@ export class UserService {
       .map((response: Response) => <IUser[]> response.json().users)
       .catch(this._sharedService.localError);
   }
-
   public getUser(id: number): Observable<IUser> {
     const options = this._sharedService.getOptions();
     const url = API_URL + USER + id;

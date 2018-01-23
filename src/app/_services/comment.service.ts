@@ -19,9 +19,9 @@ export class CommentService {
   }
 
   public addComment(id: number, text: string): void {
-    const data = JSON.stringify({id: id, text: text});
+    const data = JSON.stringify({description: text});
     const options = this._sharedService.getOptions();
-    const url = API_URL + COMMENTS;
+    const url = API_URL + POST + id + '/' + COMMENTS;
 
     this._http.post(url, data, options)
       .map(res => res)
@@ -29,7 +29,6 @@ export class CommentService {
         err => this._sharedService.localError(err)
       );
   }
-
 // @TODO Upvote comment has to wait for backend
   public upvoteComment(id: number): void {
     const data = JSON.stringify({id: id});

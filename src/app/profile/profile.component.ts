@@ -80,10 +80,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   getUser() {
     const id = 1; // fake id
      return this._userService.getUser(id)
-       .subscribe(result => {
-         this.user = result;
-         console.log(this.user);
-       });
+       .subscribe(result => this.user = result,
+         error => this._alertService.error(error));
   }
 
 }
