@@ -151,7 +151,7 @@ A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themefores
 Licensed under MIT
 -->
 
-<div class="container">
+<div *ngIf="this.user" class="container">
   <div class="row profile">
     <div class="col-md-3">
       <div class="profile-sidebar">
@@ -163,7 +163,7 @@ Licensed under MIT
         <!-- SIDEBAR USER TITLE -->
         <div class="profile-usertitle">
           <div class="profile-usertitle-name">
-            Marcus Doe
+           {{user.firstName}}
           </div>
           <div class="profile-usertitle-job">
             Developer

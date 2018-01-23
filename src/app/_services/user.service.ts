@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
-import { IUser } from '../_models/user';
+import {IUser, User} from '../_models/user';
 import { API_URL, REGISTER, USER, USERS } from '../../constants';
 import { SharedService } from './shared.service';
 
@@ -52,7 +52,7 @@ export class UserService {
     const options = this._sharedService.getOptions();
     const url = API_URL + USER + id;
 
-    return this._http.get(url, options)
+    return this._http.get(url)
       .map((response: Response) => <IUser> response.json())
       .catch(this._sharedService.localError);
   }

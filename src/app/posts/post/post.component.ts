@@ -41,7 +41,7 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.currentUser) {
+    if (this.isLoggedIn) {
       this.getUser();
     }
     this.sub = this._route.params
