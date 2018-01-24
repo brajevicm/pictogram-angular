@@ -20,7 +20,7 @@
                       <strong>{{post.title}}</strong>
                     </a>
                   </h2>
-                  <img [src]='' [title]='post.username'>
+                  <img [src]='post.userProfileImage' [title]='post.username'>
                   <h5>
                     <a [routerLink]="['/post', post.id]">
                       <strong>{{post.username}}</strong>

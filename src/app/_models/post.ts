@@ -1,5 +1,5 @@
 /**
- * Created by brajevicm on 2/06/17.
+ * Created by srdjanstevanovic on 22/01/18.
  */
 
 export interface IPost {
@@ -12,72 +12,52 @@ export interface IPost {
   upvotedPostByCurrentUser?: boolean;
   reportedPostByCurrentUser?: boolean;
   username?: string;
+  userId?: number;
+  userProfileImage?: string;
   commentsCount?: number;
   upvotesCount?: number;
-  user_id?: number;
-  flag_id?: number;
-  timestamp?: string;
-  upvotes?: number;
-  comments?: number;
-  upvoted?: number;
-  isActivePost?: boolean;
+  reportsCount?: number;
   isActiveComment?: boolean;
-  isActiveCommentBox?: boolean;
+  isActivePost?: boolean;
   isActiveReport?: boolean;
-  isActiveRemove?: boolean;
-  reports?: number;
-  reported?: number;
 }
+
 export class Post implements IPost {
   id: number;
-  user_id: number;
-  username: string;
-  flag_id: number;
   title: string;
-  postImage: string;
-  timestamp: string;
-  upvotes: number;
-  comments: number;
-  upvoted: number;
-  enabled: boolean;
   description: string;
+  postImage: string;
   createdDate: number;
+  enabled: boolean;
+  upvotedPostByCurrentUser: boolean;
+  reportedPostByCurrentUser: boolean;
+  username: string;
+  userId: number;
+  userProfileImage: string;
   commentsCount: number;
   upvotesCount: number;
-  isActivePost: boolean;
+  reportsCount: number;
   isActiveComment: boolean;
-  isActiveCommentBox: boolean;
+  isActivePost: boolean;
   isActiveReport: boolean;
-  isActiveRemove: boolean;
-  reports: number;
-  reported: number;
-  upvotedByCurrentUser: boolean;
-  reportedByCurrentUser: boolean;
 
   constructor(id: number,
-  user_id: number,
-  username: string,
-  flag_id: number,
   title: string,
-  postImage: string,
-  timestamp: string,
-  upvotes: number,
-  comments: number,
-  upvoted: number,
-  enabled: boolean,
   description: string,
+  postImage: string,
   createdDate: number,
+  enabled: boolean,
+  upvotedPostByCurrentUser: boolean,
+  reportedPostByCurrentUser: boolean,
+  username: string,
+  userId: number,
+  userProfileImage: string,
   commentsCount: number,
   upvotesCount: number,
-  isActivePost: boolean,
+  reportsCount: number,
   isActiveComment: boolean,
-  isActiveCommentBox: boolean,
-  isActiveReport: boolean,
-  isActiveRemove: boolean,
-  reports: number,
-  reported: number,
-  upvotedByCurrentUser: boolean,
-  reportedByCurrentUser: boolean
-  ) {
+  isActivePost: boolean,
+  isActiveReport: boolean
+) {
   }
 }
