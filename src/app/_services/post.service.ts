@@ -1,12 +1,12 @@
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { IPost } from '../_models/post';
+import {Observable} from 'rxjs/Observable';
+import {IPost} from '../_models/post';
 import 'rxjs/operator/map';
 import 'rxjs/operator/do';
 import 'rxjs/operator/catch';
-import { Injectable } from '@angular/core';
-import { SharedService } from './shared.service';
-import { API_URL, POST, POSTS, TOKEN, USER } from '../../constants';
+import {Injectable} from '@angular/core';
+import {SharedService} from './shared.service';
+import {API_URL, POST, POSTS, TOKEN, USER} from '../../constants';
 
 /**
  * Created by brajevicm on 2/06/17.
@@ -38,7 +38,7 @@ export class PostService {
 // finished
   getHotPosts(offset: number): Observable<IPost[]> {
     if (this._sharedService.isUserLoggedIn()) {
-      const type = '?type=hot&page=' +  offset + '&size=3';
+      const type = '?type=hot&page=' + offset + '&size=3';
       const options = this._sharedService.getOptions();
       const url = API_URL + POSTS + type;
 
@@ -47,7 +47,7 @@ export class PostService {
         // .do(data => console.log('All: ' + JSON.stringify(data)))
         .catch(this._sharedService.localError);
     } else {
-      const type = '?type=hot&page=' +  offset + '&size=3';
+      const type = '?type=hot&page=' + offset + '&size=3';
       const options = this._sharedService.getOptions();
       const url = API_URL + POSTS + type;
 
@@ -62,7 +62,7 @@ export class PostService {
 // @TODO parameter query
   getTrendingPosts(offset: number): Observable<IPost[]> {
     if (this._sharedService.isUserLoggedIn()) {
-      const type = '?type=trending&page=' +  offset + '&size=3';
+      const type = '?type=trending&page=' + offset + '&size=3';
       const options = this._sharedService.getOptions();
       const url = API_URL + POSTS + type;
 
@@ -71,7 +71,7 @@ export class PostService {
         // .do(data => console.log('All: ' + JSON.stringify(data)))
         .catch(this._sharedService.localError);
     } else {
-      const type = '?type=trending&page=' +  offset + '&size=3';
+      const type = '?type=trending&page=' + offset + '&size=3';
       const options = this._sharedService.getOptions();
       const url = API_URL + POSTS + type;
 
@@ -85,7 +85,7 @@ export class PostService {
 // @TODO parameter query
   getFreshPosts(offset: number): Observable<IPost[]> {
     if (this._sharedService.isUserLoggedIn()) {
-      const type = '?type=fresh&page=' +  offset + '&size=3';
+      const type = '?type=fresh&page=' + offset + '&size=3';
       const options = this._sharedService.getOptions();
       const url = API_URL + POSTS + type;
 
@@ -94,7 +94,7 @@ export class PostService {
         // .do(data => console.log('All: ' + JSON.stringify(data)))
         .catch(this._sharedService.localError);
     } else {
-      const type = '?type=fresh&page=' +  offset + '&size=3';
+      const type = '?type=fresh&page=' + offset + '&size=3';
       const options = this._sharedService.getOptions();
       const url = API_URL + POSTS + type;
 
@@ -104,6 +104,7 @@ export class PostService {
         .catch(this._sharedService.localError);
     }
   }
+
   // TODO edit
   getPostsFromUser(id: number): Observable<IPost[]> {
     const options = this._sharedService.getOptions();
@@ -128,7 +129,7 @@ export class PostService {
     const options = this._sharedService.getOptions();
     const type = '?type=trending&page=0&size=3';
     const url = API_URL + POSTS + type;
-      return this.getTrendingPosts(0);
+    return this.getTrendingPosts(0);
     /*return this._http.get(url, options)
       .map((response: Response) => <IPost[]> response.json().posts)
       .catch(this._sharedService.localError);*/
@@ -144,10 +145,10 @@ export class PostService {
   }
 
   upvotePost(id: number): void {
-    const options = this._sharedService.getOptions();
-    const url = API_URL + POST + id ;
+    const headers = this._sharedService.getOptions();
+    const url = API_URL + POST + id;
 
-    this._http.put(url, options)
+    this._http.put(url, null, headers)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
@@ -179,6 +180,7 @@ export class PostService {
         err => this._sharedService.localError(err)
       );
   }
+
   public getOptions(): RequestOptions {
     const headers = this.getHeaders();
     return new RequestOptions({headers: headers});

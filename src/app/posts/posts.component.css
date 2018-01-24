@@ -53,10 +53,15 @@ img {
 h2 {
   color: #c22025;
 }
-h5{
+h4 a{
+  color: black;
+}
+h4 a:hover{
+  color: #c22025;
+}
+header{
 
 }
-
 .upvoted {
   color: #c22025;
   cursor: default;
@@ -126,6 +131,12 @@ button {
   width: 5%;
 }
 
+.user-avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+
+}
 /**
  * Oscuro: #283035
  * Azul: #03658c

@@ -15,18 +15,24 @@
               <div>
                 <!-- Title -->
                 <header>
-                  <h2>
+                  <h1>
                     <a [routerLink]="['/post', post.id]">
                       <strong>{{post.title}}</strong>
                     </a>
-                  </h2>
-                  <img [src]='post.userProfileImage' [title]='post.username'>
-                  <h5>
-                    <a [routerLink]="['/post', post.id]">
-                      <strong>{{post.username}}</strong>
-                    </a>
-                  </h5>
+                  </h1>
+
+
+                    <h4>
+                      <a [routerLink]="['/profile', post.userId]">
+                      <img class="user-avatar"  [src]='post.userProfileImage' [title]='post.username' >
+
+                        <strong>{{post.username}}</strong>
+                      </a>
+                    </h4>
+
+
                 </header>
+
                 <!-- Content postImage -->
                 <div>
                   <a [routerLink]="['/post', post.id]">
@@ -39,17 +45,20 @@
                 </div>
                 <!-- Points, Comments -->
                 <p>
-                  <a *ngIf="post.upvotedPostByCurrentUser || post.isActivePost" class="mr-10" [routerLink]="['/post', post.id]">{{post.upvotesCount + 1}} · upvotes</a>
-                  <a *ngIf="!post.upvotedPostByCurrentUser && !post.isActivePost" class="mr-10" [routerLink]="['/post', post.id]">{{post.upvotesCount}} · upvotes</a>
-                  <a *ngIf="post.isActiveComment" [routerLink]="['/post', post.id]" class="mr-10">{{post.commentsCount }}
+                  <a *ngIf="post.upvotedPostByCurrentUser || post.isActivePost" class="mr-10"
+                     [routerLink]="['/post', post.id]">{{post.upvotesCount + 1}} · upvotes</a>
+                  <a *ngIf="!post.upvotedPostByCurrentUser && !post.isActivePost" class="mr-10"
+                     [routerLink]="['/post', post.id]">{{post.upvotesCount}} · upvotes</a>
+                  <a *ngIf="post.isActiveComment" [routerLink]="['/post', post.id]" class="mr-10">{{post.commentsCount
+                    }}
                     ·
                     comments</a>
                   <a *ngIf="!post.isActiveComment" [routerLink]="['/post', post.id]" class="mr-10">{{post.commentsCount}}
                     ·
                     comments</a>
-                <!--  <a *ngIf="(isLoggedIn | async) && username.role == 'admin' && post.reports > 1">{{post.reports}}
-                    ·
-                    reports</a>-->
+                  <!--  <a *ngIf="(isLoggedIn | async) && username.role == 'admin' && post.reports > 1">{{post.reports}}
+                      ·
+                      reports</a>-->
                 </p>
                 <!-- Upvote, Downvote, Comment -->
                 <div>
@@ -87,17 +96,17 @@
                           <span class="glyphicon glyphicon-comment glyphicon-not-logged"></span>
                         </a>
                       </li>
-                     <!-- <li *ngIf="(isLoggedIn | async)">
-                        <a *ngIf="!post.isActiveRemove && username.role == 'admin'"
-                           (click)="post.isActiveRemove = !post.isActiveRemove; removePost(post.id)"
-                           title="Click here to remove this post.">
-                          <span class=" glyphicon glyphicon-remove glyphicon-custom"></span>
-                        </a>
-                        <a *ngIf="post.isActiveRemove && username.role == 'admin'"
-                           title="You have already removed this post.">
-                          <span class="glyphicon glyphicon-remove glyphicon-custom upvoted"></span>
-                        </a>
-                      </li>-->
+                      <!-- <li *ngIf="(isLoggedIn | async)">
+                         <a *ngIf="!post.isActiveRemove && username.role == 'admin'"
+                            (click)="post.isActiveRemove = !post.isActiveRemove; removePost(post.id)"
+                            title="Click here to remove this post.">
+                           <span class=" glyphicon glyphicon-remove glyphicon-custom"></span>
+                         </a>
+                         <a *ngIf="post.isActiveRemove && username.role == 'admin'"
+                            title="You have already removed this post.">
+                           <span class="glyphicon glyphicon-remove glyphicon-custom upvoted"></span>
+                         </a>
+                       </li>-->
                       <li *ngIf="(isLoggedIn | async)">
                         <a *ngIf="!post.reportedPostByCurrentUser && !post.isActiveReport "
                            (click)="post.isActiveReport = !post.isActiveReport; reportPost(post.id)"
