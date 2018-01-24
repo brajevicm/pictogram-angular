@@ -1,4 +1,4 @@
-import { Http, Response } from '@angular/http';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { IPost } from '../_models/post';
 import 'rxjs/operator/map';
@@ -143,13 +143,11 @@ export class PostService {
       .catch(this._sharedService.localError);
   }
 
-  // @TODO Upvote post has to wait for backend
   upvotePost(id: number): void {
-    const data = JSON.stringify({post_id: id});
     const options = this._sharedService.getOptions();
-    const url = API_URL + this._upvote;
+    const url = API_URL + POST + id ;
 
-    this._http.post(url, data, options)
+    this._http.put(url, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
@@ -159,10 +157,10 @@ export class PostService {
   // @TODO http.delete instead of http.post
   removePost(id: number): void {
     const data = JSON.stringify({post_id: id});
-    const options = this._sharedService.getOptions();
+    const options = this.getOptions();
     const url = API_URL;
 
-    this._http.post(url, data, options)
+    this._http.put(url, data, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
@@ -180,5 +178,20 @@ export class PostService {
       .subscribe(next => next,
         err => this._sharedService.localError(err)
       );
+  }
+  public getOptions(): RequestOptions {
+    const headers = this.getHeaders();
+    return new RequestOptions({headers: headers});
+  }
+
+  private getHeaders(): Headers {
+    const headers = new Headers();
+    headers.append('Content-Type', 'text/plain');
+
+    if (this._sharedService.hasToken()) {
+      headers.append('Authorization', 'Bearer ' + this._sharedService.getToken());
+    }
+
+    return headers;
   }
 }

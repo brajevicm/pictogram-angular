@@ -74,7 +74,7 @@ export class UploadComponent implements OnInit {
       headers: {'Authorization': 'Bearer ' + this._sharedService.getToken()},
       data: {
         title: this.model.title,
-        description: 'test'
+        description: this.model.description
       },
       concurrency: 1
     };

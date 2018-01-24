@@ -41,7 +41,7 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.currentUser) {
+    if (this.isLoggedIn) {
       this.getUser();
     }
     this.sub = this._route.params
@@ -66,7 +66,7 @@ export class PostComponent implements OnInit, OnDestroy {
     const id = 1; // fake
     return this._userService.getUser(id)
       .subscribe(
-        user => user,
+        user => this.currentUser = user,
         error => this._alertService.error(error)
       );
   }

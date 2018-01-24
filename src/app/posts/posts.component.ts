@@ -19,7 +19,6 @@ import {PostsRoutingModule} from './posts-routing.module';
 export class PostsComponent implements OnInit {
   posts: IPost[] = [];
   topCommented: IPost[] = [];
-  currentUser: IUser;
   isLoggedIn: Observable<boolean>;
   loading = false;
   commentText: string;
@@ -36,19 +35,18 @@ export class PostsComponent implements OnInit {
 
   // TODO srediti sta se povlaci pri pokretanju
   ngOnInit() {
-    // this.loadHotPosts(0);
-    this.loadAllTopCommentedPosts();
     this.load(this.offset);
   }
   load(offset: number) {
       const path = window.location.pathname;
-      this.initUser();
       if (path === '/hot') {
         this.loadHotPosts(offset);
       } else if (path === '/trending') {
         this.loadTrendingPosts(offset);
       } else if (path === '/fresh') {
         this.loadFreshPosts(offset);
+      } else {
+        this.loadHotPosts(offset);
       }
     }
   onScrollDown() {
@@ -60,22 +58,6 @@ export class PostsComponent implements OnInit {
        this.offset -= 1;
        this.load(this.offset);
    }
-
-  private initUser() {
-    if (this.currentUser) {
-      this.getUser();
-    }
-  }
-
-  // @TODO fix id
-  private getUser() {
-    const id = 1; // fake id
-    return this._userService.getUser(id)
-      .subscribe(
-        user => user,
-        error => this._alertService.error(error)
-      );
-  }
 
   private initHotPosts() {
     this._postService.getHotPosts(this.offset)
@@ -91,14 +73,22 @@ export class PostsComponent implements OnInit {
         posts.map(p => {
           return {
             id: p.id,
-            title: p.title,
+            title:  p.title,
             description: p.description,
-            postImage:  p.postImage,
+            postImage:   p.postImage,
             createdDate: p.createdDate,
-            enabled: p.enabled,
-            username: p.username,
+            enabled:   p.enabled,
+            upvotedPostByCurrentUser:  p.upvotedPostByCurrentUser,
+            reportedPostByCurrentUser:  p.reportedPostByCurrentUser,
+            username:   p.username,
+            userId: p.userId,
+            userProfileImage: p.userProfileImage,
             commentsCount: p.commentsCount,
-            upvotesCount: p.upvotesCount
+            upvotesCount:   p.upvotesCount,
+            reportsCount: p.reportsCount,
+            isActiveComment: false,
+            isActivePost: false,
+            isActiveReport: false
 
           };
         }).forEach(item => this.posts.push(item));
@@ -112,15 +102,22 @@ export class PostsComponent implements OnInit {
         posts.map(p => {
           return {
             id: p.id,
-            title: p.title,
+            title:  p.title,
             description: p.description,
-            postImage: p.postImage,
+            postImage:   p.postImage,
             createdDate: p.createdDate,
-            enabled: p.enabled,
-            username: p.username,
+            enabled:   p.enabled,
+            upvotedPostByCurrentUser:  p.upvotedPostByCurrentUser,
+            reportedPostByCurrentUser:  p.reportedPostByCurrentUser,
+            username:   p.username,
+            userId: p.userId,
+            userProfileImage: p.userProfileImage,
             commentsCount: p.commentsCount,
-            upvotesCount: p.upvotesCount
-
+            upvotesCount:   p.upvotesCount,
+            reportsCount: p.reportsCount,
+            isActiveComment: false,
+            isActivePost: false,
+            isActiveReport: false
           };
         }).forEach(item => this.posts.push(item));
       });
@@ -132,18 +129,25 @@ export class PostsComponent implements OnInit {
         posts.map(p => {
           return {
             id: p.id,
-            title: p.title,
+            title:  p.title,
             description: p.description,
-            postImage: p.postImage,
+            postImage:   p.postImage,
             createdDate: p.createdDate,
-            enabled: p.enabled,
-            username: p.username,
+            enabled:   p.enabled,
+            upvotedPostByCurrentUser:  p.upvotedPostByCurrentUser,
+            reportedPostByCurrentUser:  p.reportedPostByCurrentUser,
+            username:   p.username,
+            userId: p.userId,
+            userProfileImage: p.userProfileImage,
             commentsCount: p.commentsCount,
-            upvotesCount: p.upvotesCount
-
+            upvotesCount:   p.upvotesCount,
+            reportsCount: p.reportsCount,
+            isActiveComment: false,
+            isActivePost: false,
+            isActiveReport: false
           };
-        }).forEach(item => this.posts.push(item));
-        this.posts.reverse();
+        }).forEach(item => {this.posts.push(item); console.log(item)});
+
       });
   }
 

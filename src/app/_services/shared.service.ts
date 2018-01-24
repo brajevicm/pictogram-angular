@@ -12,6 +12,7 @@ export class SharedService {
   public localError(error: Response) {
     console.error(error);
     return Observable.throw(error.json() || 'Server error');
+    // TODO ako postoji error obrisi sve i vrati ga na login page
   }
 
   public getOptions(): RequestOptions {

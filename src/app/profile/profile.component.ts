@@ -7,7 +7,7 @@ import { IPost } from '../_models/post';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from '../_services/alert.service';
 import { AuthService } from '../_services/auth.service';
-import { IUser } from '../_models/user';
+import {IUser, User} from '../_models/user';
 import { SharedService } from '../_services/shared.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   comments: IComment[];
   posts: IPost[];
   upvotedPosts: IPost[];
+  isLogged: boolean;
 
   constructor(private _userService: UserService,
               private _commentService: CommentService,
@@ -29,15 +30,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private _sharedService: SharedService,
               private _alertService: AlertService,
               private  _authService: AuthService) {
-   // this.currentUser = JSON.parse(_sharedService.getToken());
+    this.isLogged = this._sharedService.isUserLoggedIn();
   }
 
   ngOnInit() {
-    if (this.currentUser) {
-      // this.getUser();
-      // this.getPosts();
-      // this.getComments();
-      // this.getUpvotedPosts();
+    if (this.isLogged) {
+      this.getUser();
+
+   /*    this.getPosts();
+       this.getComments();
+      this.getUpvotedPosts();*/
     }
   }
 
@@ -77,11 +79,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   // @TODO pass proper id
   getUser() {
     const id = 1; // fake id
-    return this._userService.getUser(id)
-      .subscribe(
-        user => this.user = user,
-        error => this._alertService.error(error)
-      );
+     return this._userService.getUser(id)
+       .subscribe(result => this.user = result,
+         error => this._alertService.error(error));
   }
 
 }
