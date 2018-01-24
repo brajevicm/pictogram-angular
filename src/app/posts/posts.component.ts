@@ -33,7 +33,7 @@ export class PostsComponent implements OnInit {
     this.isLoggedIn = this._authService.isLoggedIn();
   }
 
-  // TODO srediti sta se povlaci pri pokretanju
+  // TODO srediti prikaz lajkovanih postova
   ngOnInit() {
     this.load(this.offset);
   }
@@ -146,7 +146,7 @@ export class PostsComponent implements OnInit {
             isActivePost: false,
             isActiveReport: false
           };
-        }).forEach(item => {this.posts.push(item); console.log(item)});
+        }).forEach(item => this.posts.push(item));
 
       });
   }

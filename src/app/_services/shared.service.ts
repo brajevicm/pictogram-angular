@@ -51,4 +51,3 @@ export class SharedService {
     return !!localStorage.getItem(TOKEN);
   }
 }
-
