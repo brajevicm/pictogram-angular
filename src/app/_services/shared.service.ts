@@ -1,7 +1,7 @@
-import { Headers, RequestOptions, Response } from '@angular/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { TOKEN } from '../../constants';
+import {Headers, RequestOptions, Response} from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
+import {TOKEN} from '../../constants';
 
 /**
  * Created by brajevicm on 13/01/18.
@@ -17,10 +17,10 @@ export class SharedService {
 
   public getOptions(): RequestOptions {
     const headers = this.getHeaders();
-    return new RequestOptions({headers: headers});
+    return new RequestOptions({headers});
   }
 
-  private getHeaders(): Headers {
+  public getHeaders(): Headers {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
@@ -38,6 +38,7 @@ export class SharedService {
     }
     return false;
   }
+
   public getToken(): string {
     return localStorage.getItem(TOKEN).replace(/['"]+/g, '');
   }
