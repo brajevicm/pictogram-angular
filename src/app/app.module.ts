@@ -24,6 +24,7 @@ import { SharedService } from './_services/shared.service';
 import {SettingsComponent} from './profile/settings/settings.component';
 import {ProfileGuard} from './_guards/profile.guard';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import {ProfileGuard} from './_guards/profile.guard';
     AlertComponent,
     ProfileComponent,
     UploadComponent,
-    SettingsComponent
+    SettingsComponent,
+
   ],
   imports: [
     BrowserModule,

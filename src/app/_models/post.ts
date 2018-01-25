@@ -1,6 +1,8 @@
+
 /**
  * Created by srdjanstevanovic on 22/01/18.
  */
+
 
 export interface IPost {
   id?: number;

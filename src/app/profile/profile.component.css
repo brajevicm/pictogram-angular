@@ -419,7 +419,7 @@ ul {
 
 
 /*
--------------------------*/
+------------------------*/
 /***
 User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
@@ -427,12 +427,11 @@ Licensed under MIT
 ***/
 .container{
   background: #fff;
-
-
   width:100%;
 }
 
 .glyphicon {
+
 
 }
 /* Profile container */
@@ -454,6 +453,8 @@ Licensed under MIT
   -moz-border-radius: 100% !important;
   border-radius: 100% !important;
 }
+
+
 
 .profile-usertitle {
   text-align: center;

@@ -1,3 +1,4 @@
+
 /**
  * Created by srdjanstevanovic on 24/01/18.
  */
@@ -37,5 +38,6 @@ export class User implements IUser {
   lastPasswordResetDate: number,
   authorities: IAuthority[]
 ) {
+
   }
 }
