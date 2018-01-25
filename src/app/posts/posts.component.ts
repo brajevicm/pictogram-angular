@@ -19,6 +19,7 @@ import {PostsRoutingModule} from './posts-routing.module';
 export class PostsComponent implements OnInit {
   posts: IPost[] = [];
   topCommented: IPost[] = [];
+  currentUser: IUser;
   isLoggedIn: Observable<boolean>;
   loading = false;
   commentText: string;
@@ -36,6 +37,10 @@ export class PostsComponent implements OnInit {
   // TODO srediti prikaz lajkovanih postova
   ngOnInit() {
     this.load(this.offset);
+    this.isLoggedIn = this._authService.isLoggedIn();
+    if (this.isLoggedIn) {
+      this.getUser();
+    }
   }
   load(offset: number) {
     const path = window.location.pathname;
@@ -66,6 +71,13 @@ export class PostsComponent implements OnInit {
         this.posts = posts;
       })
     ;
+  }
+  private getUser() {
+    return this._userService.getCurrentUser()
+      .subscribe(
+        user => this.currentUser = user,
+        error => this._alertService.error(error)
+      );
   }
 
   private loadHotPosts(offset: number) {

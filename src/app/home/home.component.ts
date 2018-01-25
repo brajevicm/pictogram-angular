@@ -28,9 +28,12 @@ export class HomeComponent implements OnInit {
               private _alertService: AlertService) {
     this.isLoggedIn = this._authService.isLoggedIn();
   }
-ngOnInit(){
+ngOnInit() {
+  if (this.isLoggedIn) {
+    console.log(this.isLoggedIn);
     this.getUser();
-}
+    }
+  }
 
   private getUser() {
     return this._userService.getCurrentUser()

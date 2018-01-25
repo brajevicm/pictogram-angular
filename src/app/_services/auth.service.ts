@@ -18,9 +18,9 @@ export class AuthService {
   private token: string;
   private user: IUser;
   isLoginSubject = new BehaviorSubject<boolean>(this._sharedService.hasToken());
-
   constructor(private _http: Http,
-              private _sharedService: SharedService) {
+              private _sharedService: SharedService,
+              private _userService: UserService) {
   }
 
   public login(username: string, password: string): Observable<boolean> {
@@ -37,6 +37,7 @@ export class AuthService {
             const timer = TimerObservable.create(2000, 500);
             timer.subscribe(t => {
               this.isLoginSubject.next(true);
+              location.reload();
               return true;
             });
           } else {
@@ -54,4 +55,5 @@ export class AuthService {
   public isLoggedIn(): Observable<boolean> {
     return this.isLoginSubject.asObservable();
   }
+
 }
