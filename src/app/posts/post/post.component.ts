@@ -28,6 +28,7 @@ export class PostComponent implements OnInit, OnDestroy {
   loading = false;
   offset = 0;
   postID: number;
+  isLog: boolean
   private sub: Subscription;
 
   constructor(private _route: ActivatedRoute,
@@ -45,7 +46,6 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.isLoggedIn) {
       this.getUser();
-      console.log(this.currentUser.id);
     }
     this.sub = this._route.params
       .subscribe(params => {

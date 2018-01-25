@@ -1,6 +1,7 @@
 /**
  * Created by srdjanstevanovic on 24/01/18.
  */
+import {IAuthority} from './authority.model';
 
 export interface IUser {
   id?: number;
@@ -12,6 +13,7 @@ export interface IUser {
   enabled?: boolean;
   createdDate?: number;
   lastPasswordResetDate?: number;
+  authorities?: IAuthority [];
 }
 export class User implements IUser {
   id: number;
@@ -23,6 +25,7 @@ export class User implements IUser {
   enabled: boolean;
   createdDate: number;
   lastPasswordResetDate: number;
+  authorities: IAuthority[];
   constructor( id: number,
   username: string,
   firstName: string,
@@ -31,7 +34,8 @@ export class User implements IUser {
   profileImage: string,
   enabled: boolean,
   createdDate: number,
-  lastPasswordResetDate: number
+  lastPasswordResetDate: number,
+  authorities: IAuthority[]
 ) {
   }
 }
