@@ -5,6 +5,8 @@ body {
     font-family: 'Raleway', sans-serif;
     -webkit-transition: width 2s;
     transition: width 2s;
+  background-color: whitesmoke;
+
 }
 
 div {
