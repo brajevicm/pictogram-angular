@@ -60,7 +60,7 @@ export class UserService {
     const options = this._sharedService.getOptions();
     const url = API_URL + 'user';
     return this._http.get(url, options)
-      .map((response: Response) => <IUser> response.json())
+      .map((response: Response) => response.json() as IUser)
       .catch(this._sharedService.localError);
   }
 }

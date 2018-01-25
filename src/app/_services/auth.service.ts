@@ -18,8 +18,6 @@ export class AuthService {
   private token: string;
   private user: IUser;
   isLoginSubject = new BehaviorSubject<boolean>(this._sharedService.hasToken());
-  loggedInUser = new BehaviorSubject<IUser>(this._userService.getCurrentUser());
-
   constructor(private _http: Http,
               private _sharedService: SharedService,
               private _userService: UserService) {
@@ -57,8 +55,5 @@ export class AuthService {
   public isLoggedIn(): Observable<boolean> {
     return this.isLoginSubject.asObservable();
   }
-  public isCurrentUser(): IUser {
 
-    return this.loggedInUser.asObservable();
-  }
 }
