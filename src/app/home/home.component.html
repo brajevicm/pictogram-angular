@@ -44,7 +44,7 @@
           <li [routerLinkActive]="['underline']">
             <a [routerLink]="['/upload']">Upload</a>
           </li>
-          <li *ngIf="currentUser" (click)="setTitle('Pictogram | Profile')" [routerLinkActive]="['underline']">
+          <li *ngIf="currentUser && isLoggedIn" (click)="setTitle('Pictogram | Profile')" [routerLinkActive]="['underline']">
             <a [routerLink]="['/profile', currentUser.id]">Profile</a>
           </li>
           <li><a href="" (click)="logout()">Logout</a></li>

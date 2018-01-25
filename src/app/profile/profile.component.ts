@@ -41,8 +41,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.isLoggedIn) {
       this.sub = this._route.params
         .subscribe(params => {
-          const id = +params['id'];
-          console.log(id);
+          const id = +params['userid'];
           this.getUser(id);
         });
    /*    this.getPosts();

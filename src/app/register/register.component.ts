@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
         password: this.model.password,
         firstName: this.model.firstName,
         lastName: this.model.lastName,
-        email: 'milos@mail.com'
+        email: this.model.email
       },
       concurrency: 1
     };

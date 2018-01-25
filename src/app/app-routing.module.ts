@@ -7,6 +7,7 @@ import { PostsComponent } from 'app/posts/posts.component';
 import { UploadComponent } from './upload/upload.component';
 import {SettingsComponent} from './profile/settings/settings.component';
 import {ProfileGuard} from './_guards/profile.guard';
+import {RegisterGuard} from './_guards/register.guard';
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -22,7 +23,7 @@ import {ProfileGuard} from './_guards/profile.guard';
           ]
         },
         // {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-        {path: 'register', component: RegisterComponent },
+        {path: 'register', component: RegisterComponent, canActivate: [RegisterGuard] },
         {path: 'upload', component: UploadComponent, canActivate: [AuthGuard]},
         {path: '', component: PostsComponent}
       ]

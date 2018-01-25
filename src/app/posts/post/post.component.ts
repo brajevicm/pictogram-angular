@@ -70,8 +70,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   // @TODO fix backend
   private getUser() {
-    const id = 1; // fake
-    return this._userService.getUser(id)
+    return this._userService.getCurrentUser()
       .subscribe(
         user => this.currentUser = user,
         error => this._alertService.error(error)
