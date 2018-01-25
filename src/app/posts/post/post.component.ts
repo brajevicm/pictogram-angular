@@ -45,11 +45,11 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.isLoggedIn) {
       this.getUser();
+      console.log(this.currentUser.id);
     }
     this.sub = this._route.params
       .subscribe(params => {
         const id = +params['id'];
-        console.log(id);
         this.postID = id;
         this.getPost(id);
         this.getComments(id, this.offset);
@@ -68,7 +68,7 @@ export class PostComponent implements OnInit, OnDestroy {
     this.getComments(this.postID, this.offset);
   }
 
-  // @TODO fix backend
+
   private getUser() {
     return this._userService.getCurrentUser()
       .subscribe(

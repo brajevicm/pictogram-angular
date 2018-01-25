@@ -48,11 +48,11 @@
           <div class="container" *ngIf="post" [ngClass]="{'is-active': post.isActivePost}">
             <p>
 
-              <a *ngIf="post.isActivePost" class="mr-10">{{post.upvotes + 1}} · upvotes</a>
+              <a *ngIf="post.isActivePost" class="mr-10">{{post.upvotesCount + 1}} · upvotes</a>
               <a *ngIf="!post.isActivePost" class="mr-10">{{post.upvotesCount}} · upvotes</a>
-              <a *ngIf="post.isActiveComment" class="mr-10">{{post.comments + 1}} · comments</a>
+              <a *ngIf="post.isActiveComment" class="mr-10">{{post.commentsCount + 1}} · comments</a>
               <a *ngIf="!post.isActiveComment" class="mr-10">{{post.commentsCount}} · comments</a>
-              <a *ngIf="currentUser && currentUser.role == 'admin'">{{post.reports}}
+              <a *ngIf="currentUser && currentUser.authority == 'admin'">{{post.reportsCount}}
                 ·
                 reports</a>
               <a *ngIf="!isLoggedIn | async" class="right glyphicon-position"
