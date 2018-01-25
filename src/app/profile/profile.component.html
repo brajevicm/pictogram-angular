@@ -178,41 +178,39 @@ Licensed under MIT
         <!-- SIDEBAR MENU -->
         <div class="profile-usermenu">
           <ul class="nav">
-            <li class="active">
-              <a href="#">
-                <i class="glyphicon glyphicon-home"></i>
-                Overview </a>
-            </li>
+
             <!--surround with if username then show-->
-            <li>
-              <a [routerLink]="['/profile']">
-                <i class="glyphicon glyphicon-user"></i>
-                Account Settings </a>
-            </li>
+
 
             <li>
-              <a href="#" target="_blank">
+              <a [routerLink]="['/profile',1,'posts']">
                 <i class="glyphicon glyphicon-paste"></i>
                 Posts </a>
             </li>
             <li>
-              <a href="#" target="_blank">
+              <a [routerLink]="['/profile',1,'upvotes']">
                 <i class="glyphicon glyphicon-heart"></i>
                 Likes </a>
             </li>
             <li>
-              <a href="#">
+              <a [routerLink]="['/profile',1,'comments']">
                 <i class="glyphicon glyphicon-comment"></i>
                 Comments </a>
             </li>
+            <li>
+              <a [routerLink]="['/profile',1,'settings']">
+                <i class="glyphicon glyphicon-user"></i>
+                Account Settings </a>
+            </li>
           </ul>
+
         </div>
         <!-- END MENU -->
       </div>
     </div>
     <div class="col-md-9">
       <div class="profile-content">
-        Some user related content goes here...
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>

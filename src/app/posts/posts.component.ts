@@ -55,10 +55,10 @@ export class PostsComponent implements OnInit {
   }
 
    onScrollUp() {
-       this.offset -= 1;
-       this.load(this.offset);
+     if (this.offset > 0) {
+      this.offset -= 1;
+     }
    }
-
   private initHotPosts() {
     this._postService.getHotPosts(this.offset)
       .subscribe(posts => {

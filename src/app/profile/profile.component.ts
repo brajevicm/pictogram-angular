@@ -9,6 +9,8 @@ import { AlertService } from '../_services/alert.service';
 import { AuthService } from '../_services/auth.service';
 import {IUser, User} from '../_models/user';
 import { SharedService } from '../_services/shared.service';
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'profile',
@@ -21,7 +23,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   comments: IComment[];
   posts: IPost[];
   upvotedPosts: IPost[];
-  isLogged: boolean;
+  isLoggedIn: Observable<boolean>;
+
+  private sub: Subscription;
 
   constructor(private _userService: UserService,
               private _commentService: CommentService,
@@ -30,13 +34,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private _sharedService: SharedService,
               private _alertService: AlertService,
               private  _authService: AuthService) {
-    this.isLogged = this._sharedService.isUserLoggedIn();
+    this.isLoggedIn = this._authService.isLoggedIn();
   }
 
   ngOnInit() {
-    if (this.isLogged) {
-      this.getUser();
-
+    if (this.isLoggedIn) {
+      this.sub = this._route.params
+        .subscribe(params => {
+          const id = +params['id'];
+          console.log(id);
+          this.getUser(id);
+        });
    /*    this.getPosts();
        this.getComments();
       this.getUpvotedPosts();*/
@@ -44,11 +52,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   // @TODO
-  getPosts() {
-    const id = 1; // fake id
+  getPosts(id: number) {
     this._postService.getPostsFromUser(id)
       .map(res => res)
       .subscribe(res => this.posts = res);
@@ -77,8 +85,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   // @TODO pass proper id
-  getUser() {
-    const id = 1; // fake id
+  getUser(id: number) {
      return this._userService.getUser(id)
        .subscribe(result => this.user = result,
          error => this._alertService.error(error));

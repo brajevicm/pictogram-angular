@@ -62,17 +62,17 @@ export class CommentService {
     const options = this._sharedService.getOptions();
     const url = API_URL + this._report;
 
-    this._http.post(url, data, options)
+    this._http.patch(url, data, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
       );
   }
 
-  public getPostComments(id: number): Observable<IComment[]> {
+  public getPostComments(id: number, offset: number): Observable<IComment[]> {
     const data = JSON.stringify({post_id: id});
     const options = this._sharedService.getOptions();
-    const url = API_URL + POST + id + '/' + COMMENTS + '?page=0&size=10' ;
+    const url = API_URL + POST + id + '/' + COMMENTS + '?page=' + offset + '&size=10';
 
     return this._http.get(url, options)
       .map((response: Response) => <IComment[]> response.json().content)

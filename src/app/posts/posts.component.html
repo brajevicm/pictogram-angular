@@ -67,16 +67,16 @@
                       <li class="mr-10">
                         <a *ngIf="!(isLoggedIn | async)"
                            title="You have to be logged it to be able to upvote.">
-                          <span class="glyphicon glyphicon-heart glyphicon-not-logged"></span>
+                          <span class="glyphicon glyphicon-arrow-up glyphicon-not-logged"></span>
                         </a>
                         <a *ngIf="!post.upvotedPostByCurrentUser  && !post.isActivePost"
                            (click)="post.isActivePost = !post.isActivePost; upvotePost(post.id)"
                            title="Click here to upvote this post.">
-                          <span class=" glyphicon glyphicon-heart glyphicon-custom"></span>
+                          <span class="glyphicon glyphicon-arrow-up glyphicon-custom"></span>
                         </a>
                         <a *ngIf="post.upvotedPostByCurrentUser || post.isActivePost"
                            title="You have already upvoted this post.">
-                          <span class="glyphicon glyphicon-heart glyphicon-custom upvoted"></span>
+                          <span class="glyphicon glyphicon-arrow-up glyphicon-custom upvoted"></span>
                         </a>
                       </li>
                       <li class="mr-10">

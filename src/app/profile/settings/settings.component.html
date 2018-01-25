@@ -1,0 +1,61 @@
+<!--<div *ngIf="this.user" class="span3">-->
+<!--<h2>Sign Up</h2>-->
+<!--<form>-->
+<!--<label></label>-->
+<!--<input type="text" name="firstname" ngModel="{{user.username}}" class="span3">-->
+<!--<label>Last Name</label>-->
+<!--<input type="text" name="lastname" class="span3">-->
+<!--<label>Email Address</label>-->
+<!--<input type="email" name="email" class="span3">-->
+<!--<label>Username</label>-->
+<!--<input type="text" name="username" class="span3">-->
+<!--<label>Password</label>-->
+<!--<input type="password" name="password" class="span3">-->
+<!--<label><input type="checkbox" name="terms"> I agree with the <a href="#">Terms and Conditions</a>.</label>-->
+<!--<input type="submit" value="Sign up" class="btn btn-primary pull-right">-->
+<!--<div class="clearfix"></div>-->
+<!--</form>-->
+<!--</div>-->
+
+<div class="space-medium">
+<div *ngIf="this.user" class="container">
+  <div class="row">
+    <div class="form-area">
+      <form class="account-holder">
+        <br style="clear:both">
+        <h3 style="margin-bottom: 25px; text-align: center;">Account Settings</h3>
+        <div class="form-group" name="form">
+          <label>Username:</label>
+          <input type="text" class="form-control" ngModel="{{user.username}}" placeholder="{{user.username}}"  name="username" placeholder="Username"
+                 >
+        </div>
+        <!--<div class="form-group">-->
+          <!--<label>Password:</label>-->
+          <!--<input type="text" class="form-control"  name="password" ngModel="{{user.password}}"-->
+                 <!--readonly="readonly">-->
+        <!--</div>-->
+        <div class="form-group">
+          <label>Firs name:</label>
+          <input type="text" class="form-control" name="firstName" placeholder="{{user.firstName}}"  ngModel="{{user.firstName}}"
+                 >
+        </div>
+        <div class="form-group">
+          <label>Last name:</label>
+          <input type="text" class="form-control" name="lastName"  placeholder="{{user.lastName}}" ngModel="{{user.lastName}}"
+                 >
+        </div>
+        <div class="form-group">
+          <label>Email:</label>
+          <input type="text" class="form-control"   name="email" ngModel="{{user.email}}"
+                placeholder="{{user.email}}">
+<br>
+<br>
+          <button type="button" id="submit" name="submit"  (click)="EditAcc()"  class="btn btn-primary pull-right">Edit</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+

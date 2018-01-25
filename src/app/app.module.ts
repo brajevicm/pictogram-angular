@@ -21,6 +21,8 @@ import { UploadComponent } from './upload/upload.component';
 import { NgUploaderModule } from 'ngx-uploader';
 import { RegisterGuard } from './_guards/register.guard';
 import { SharedService } from './_services/shared.service';
+import {SettingsComponent} from './profile/settings/settings.component';
+import {ProfileGuard} from './_guards/profile.guard';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { SharedService } from './_services/shared.service';
     AlertComponent,
     ProfileComponent,
     UploadComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { SharedService } from './_services/shared.service';
     UserService,
     AuthGuard,
     PostGuard,
-    RegisterGuard
+    RegisterGuard,
+    ProfileGuard
   ],
   bootstrap: [AppComponent]
 })
