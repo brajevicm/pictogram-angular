@@ -15,7 +15,7 @@ export class RegisterGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this._authService.isLoggedIn()) {
-      this._router.navigate(['/hot'], {queryParams: {returnUrl: state.url}});
+      this._router.navigate(['/hot']);
       return false;
     }
 

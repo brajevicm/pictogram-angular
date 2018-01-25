@@ -158,7 +158,7 @@ export class PostService {
   // @TODO http.delete instead of http.post
   removePost(id: number): void {
     const data = JSON.stringify({post_id: id});
-    const options = this.getOptions();
+    const options = this._sharedService.getOptions();
     const url = API_URL;
 
     this._http.put(url, data, options)
@@ -168,7 +168,7 @@ export class PostService {
       );
   }
 
-  // @TODO Report post has to wait for backend
+  // @TODO fixed
   reportPost(id: number): void {
     const data = JSON.stringify({post_id: id});
     const options = this._sharedService.getOptions();
@@ -181,19 +181,4 @@ export class PostService {
       );
   }
 
-  public getOptions(): RequestOptions {
-    const headers = this.getHeaders();
-    return new RequestOptions({headers: headers});
-  }
-
-  private getHeaders(): Headers {
-    const headers = new Headers();
-    headers.append('Content-Type', 'text/plain');
-
-    if (this._sharedService.hasToken()) {
-      headers.append('Authorization', 'Bearer ' + this._sharedService.getToken());
-    }
-
-    return headers;
-  }
 }
