@@ -172,9 +172,9 @@ export class PostService {
   reportPost(id: number): void {
     const data = JSON.stringify({post_id: id});
     const options = this._sharedService.getOptions();
-    const url = API_URL;
+    const url = API_URL + POST + id;
 
-    this._http.post(url, data, options)
+    this._http.patch(url, null, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)

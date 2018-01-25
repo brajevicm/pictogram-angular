@@ -26,6 +26,8 @@ export class PostComponent implements OnInit, OnDestroy {
   upvoted = false;
   commentText: string;
   loading = false;
+  offset = 0;
+  postID: number;
   private sub: Subscription;
 
   constructor(private _route: ActivatedRoute,
@@ -47,9 +49,10 @@ export class PostComponent implements OnInit, OnDestroy {
     this.sub = this._route.params
       .subscribe(params => {
         const id = +params['id'];
+        console.log(id);
+        this.postID = id;
         this.getPost(id);
-        this.getComments(id);
-
+        this.getComments(id, this.offset);
       });
   }
 
@@ -59,6 +62,10 @@ export class PostComponent implements OnInit, OnDestroy {
 
   clearText() {
     this.commentText = null;
+  }
+  onScrollDown() {
+    this.offset += 1;
+    this.getComments(this.postID, this.offset);
   }
 
   // @TODO fix backend
@@ -77,16 +84,29 @@ export class PostComponent implements OnInit, OnDestroy {
         post => this.post = post,
         error => this._alertService.error(error),
       );
-  }
 
-  getComments(id: number) {
-    this._commentService.getPostComments(id)
-      .subscribe(
-        content => this.comments = content,
-        error => this._alertService.error(error)
-      );
   }
+  private getComments(id: number, offset: number) {
+    this._commentService.getPostComments(id, offset)
+      .subscribe(content => {
+        content.map(c => {
+          return {
+            id: c.id,
+            description: c.description,
+            createdDate: c.createdDate,
+            enabled: c.enabled,
+            upvotedCommentByCurrentUser: c.upvotedCommentByCurrentUser,
+            reportedCommentByCurrentUser: c.reportedCommentByCurrentUser,
+            username: c.username,
+            upvotesCount: c.upvotesCount,
+            reportsCount: c.reportsCount,
+            userProfileImage: c.userProfileImage,
+            userId: c.userId
 
+          };
+        }).forEach(item => this.comments.push(item));
+      });
+  }
   addComment(post_id: number) {
     post_id = parseFloat(post_id.toString());
     this._commentService.addComment(post_id, this.commentText);

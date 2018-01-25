@@ -55,4 +55,12 @@ export class UserService {
       .map((response: Response) => <IUser> response.json())
       .catch(this._sharedService.localError);
   }
+
+  public getCurrentUser(): Observable<IUser> {
+    const options = this._sharedService.getOptions();
+    const url = API_URL + 'user';
+    return this._http.get(url, options)
+      .map((response: Response) => <IUser> response.json())
+      .catch(this._sharedService.localError);
+  }
 }
