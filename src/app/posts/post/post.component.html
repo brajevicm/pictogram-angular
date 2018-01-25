@@ -36,12 +36,84 @@
             <p></p>
           </div>
           <!-- Upvote, Downvote, Comment -->
-          <!--     <div class="content-spacing"></div>
-             </div>-->
 
-          <div class="jumbotron">
-            <h2>Description: </h2>
-            {{post.description}}
+     <!--     <div class="content-spacing"></div>
+        </div>-->
+
+        <div class="jumbotron">
+          <h2>Description: </h2>
+          {{post.description}}
+
+
+        </div>
+          <div class="container" *ngIf="post" [ngClass]="{'is-active': post.isActivePost}">
+          <p>
+
+          <a *ngIf="post.isActivePost" class="mr-10">{{post.upvotes + 1}} · upvotes</a>
+          <a *ngIf="!post.isActivePost" class="mr-10">{{post.upvotesCount}} · upvotes</a>
+          <a *ngIf="post.isActiveComment" class="mr-10">{{post.comments + 1}} · comments</a>
+          <a *ngIf="!post.isActiveComment" class="mr-10">{{post.commentsCount}} · comments</a>
+          <a *ngIf="currentUser && currentUser.role == 'admin'">{{post.reports}}
+            ·
+            reports</a>
+          <a *ngIf="!currentUser" class="right glyphicon-position"
+             title="You have to be logged it to be able to upvote.">
+            <span class="glyphicon glyphicon-heart glyphicon-not-logged"></span>
+          </a>
+          <a *ngIf="post.upvoted == '0' && !post.isActivePost" class="right glyphicon-position"
+             (click)="post.isActivePost = !post.isActivePost; upvoteComment(post.id)"
+             title="Click here to upvote this post.">
+            <span class=" glyphicon glyphicon-heart glyphicon-custom"></span>
+          </a>
+          <a *ngIf="post.upvoted == '1' || post.isActivePost" class="right glyphicon-position"
+             title="You have already upvoted this post.">
+            <span class="glyphicon glyphicon-heart glyphicon-custom upvoted"></span>
+          </a>
+
+          <a *ngIf="currentUser && !post.isActiveRemove && currentUser.role == 'admin'"
+             class="right glyphicon-position mr-10"
+             (click)="post.isActiveRemove = !post.isActiveRemove; removePost(post.id)"
+             title="Click here to remove this post.">
+            <span class=" glyphicon glyphicon-remove glyphicon-custom"></span>
+          </a>
+          <a *ngIf="currentUser && post.isActiveRemove && currentUser.role == 'admin'"
+             class="right glyphicon-position mr-10"
+             title="You have already removed this post.">
+            <span class="glyphicon glyphicon-remove glyphicon-custom upvoted"></span>
+          </a>
+
+          <a *ngIf="currentUser && post.reported == '0' && !post.isActiveReport && currentUser.role == 'username'"
+             class="right glyphicon-position mr-10"
+             (click)="post.isActiveReport = !post.isActiveReport; reportPost(post.id)"
+             title="Click here to report this post.">
+            <span class=" glyphicon glyphicon-exclamation-sign glyphicon-custom"></span>
+          </a>
+          <a *ngIf="currentUser && (post.isActiveReport || post.reported == '1') && currentUser.role == 'username'"
+             class="right glyphicon-position mr-10"
+             title="You have already reported this post.">
+            <span class="glyphicon glyphicon-exclamation-sign glyphicon-custom upvoted"></span>
+          </a>
+          </p>
+
+        </div>
+
+        <div class="row">
+          <div class="widget-area no-padding blank">
+            <div class="status-upload">
+
+              <form>
+                                <textarea [(ngModel)]="commentText" name="comment"
+                                          placeholder="Make this post even cooler!">
+                                </textarea>
+                <button [disabled]="loading" (click)="addComment(post.id); clearText()"
+                        type="button" title="Click here to comment on this post."
+                        class="btn btn-success green">
+                  Submit
+                </button>
+              </form>
+            </div><!-- Status Upload  -->
+          </div><!-- Widget Area -->
+        </div>
 
 
           </div>
@@ -105,35 +177,37 @@
               <div class="comments-container">
                 <ul id="comments-list" class="comments-list" *ngFor="let comment of comments">
                   <!--[ngClass]="{'is-active': [comment.isActive, comment.isActiveReport, comment.isActiveRemove]}"-->
-                  <li>
-                    <div class="comment-main-level">
-                      <div class="comment-avatar">
-                        <img [src]='comment.userProfileImage' [title]='comment.username'>
-                      </div>
-                      <div class="comment-box">
-                        <div class="comment-head">
-                          <h6 class="comment-name">
-                            <a>
-                              {{comment.username}}
-                            </a>
-                          </h6>
-                          <div>
-                            <a *ngIf="!isLoggedIn" class="right glyphicon-position"
-                               title="You have to be logged it to be able to upvote.">
-                              <span class="glyphicon glyphicon-arrow-up glyphicon-not-logged"></span>
-                            </a>
-                            <a *ngIf="comment.upvoted == '1' || comment.isActive"
-                               class="right glyphicon-position"
-                               title="You have already upvoted this comment.">
-                              <span class="glyphicon glyphicon-arrow-up glyphicon-custom upvoted"></span>
-                            </a>
-                            <a *ngIf="comment.upvoted == '0' && !comment.isActive"
-                               class="right glyphicon-position"
-                               title="Click here to upvote this comment."
-                               (click)="comment.isActive = !comment.isActive; upvoteComment(comment.id)">
-                              <span class="glyphicon glyphicon-arrow-up glyphicon-custom"></span>
-                            </a>
-                          </div>
+
+                <li>
+                  <div class="comment-main-level">
+                    <div class="comment-avatar">
+                      <img [src]='comment.userProfileImage' [title]='comment.username'>
+                    </div>
+                    <div class="comment-box">
+                      <div class="comment-head">
+                        <h6 class="comment-name">
+                          <a>
+                            {{comment.username}}
+                          </a>
+                        </h6>
+                        <div>
+                          <a *ngIf="!isLoggedIn" class="right glyphicon-position"
+                             title="You have to be logged it to be able to upvote.">
+                            <span class="glyphicon glyphicon-heart glyphicon-not-logged"></span>
+                          </a>
+                          <a *ngIf="comment.upvoted == '1' || comment.isActive"
+                             class="right glyphicon-position"
+                             title="You have already upvoted this comment.">
+                            <span class="glyphicon glyphicon-heart glyphicon-custom upvoted"></span>
+                          </a>
+                          <a *ngIf="comment.upvoted == '0' && !comment.isActive"
+                             class="right glyphicon-position"
+                             title="Click here to upvote this comment."
+                             (click)="comment.isActive = !comment.isActive; upvoteComment(comment.id)">
+                            <span class="glyphicon glyphicon-heart glyphicon-custom"></span>
+                          </a>
+                        </div>
+
 
                           <div *ngIf="isLoggedIn">
                             <a *ngIf="!comment.isActiveRemove && currentUser.role == 'admin'"
@@ -185,5 +259,6 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <!--</div>-->

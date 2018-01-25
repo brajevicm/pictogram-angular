@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
-import { AuthGuard } from './_guards/auth.guard';
-import { ProfileComponent } from './profile/profile.component';
-import { PostsComponent } from 'app/posts/posts.component';
-import { UploadComponent } from './upload/upload.component';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {RegisterComponent} from './register/register.component';
+import {AuthGuard} from './_guards/auth.guard';
+import {ProfileComponent} from './profile/profile.component';
+import {PostsComponent} from 'app/posts/posts.component';
+import {UploadComponent} from './upload/upload.component';
 import {SettingsComponent} from './profile/settings/settings.component';
 import {ProfileGuard} from './_guards/profile.guard';
+
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -17,12 +18,12 @@ import {ProfileGuard} from './_guards/profile.guard';
           children: [
             {path: 'posts', component: PostsComponent},
             {path: 'upvotes', component: PostsComponent},
-            {path: 'comments', component: PostsComponent},
+            {path: 'comments', component: PostsComponent}, //CommentsComponent
             {path: 'settings', component: SettingsComponent}
           ]
         },
         // {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-        {path: 'register', component: RegisterComponent },
+        {path: 'register', component: RegisterComponent},
         {path: 'upload', component: UploadComponent, canActivate: [AuthGuard]},
         {path: '', component: PostsComponent}
       ]

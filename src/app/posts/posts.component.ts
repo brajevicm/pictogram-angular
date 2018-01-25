@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit {
               private _commentService: CommentService,
               private _alertService: AlertService,
               private _authService: AuthService
-              ) {
+  ) {
     this.isLoggedIn = this._authService.isLoggedIn();
   }
 
@@ -38,27 +38,35 @@ export class PostsComponent implements OnInit {
     this.load(this.offset);
   }
   load(offset: number) {
-      const path = window.location.pathname;
-      if (path === '/hot') {
-        this.loadHotPosts(offset);
-      } else if (path === '/trending') {
-        this.loadTrendingPosts(offset);
-      } else if (path === '/fresh') {
-        this.loadFreshPosts(offset);
-      } else {
-        this.loadHotPosts(offset);
-      }
+    const path = window.location.pathname;
+    if (path === '/hot') {
+      this.loadHotPosts(offset);
+    } else if (path === '/trending') {
+      this.loadTrendingPosts(offset);
+    } else if (path === '/fresh') {
+      this.loadFreshPosts(offset);
+    } else {
+      this.loadHotPosts(offset);
     }
+  }
   onScrollDown() {
     this.offset += 1;
     this.load(this.offset);
   }
 
+<<<<<<< Updated upstream
    onScrollUp() {
      if (this.offset > 0) {
       this.offset -= 1;
      }
    }
+=======
+  onScrollUp() {
+    this.offset -= 1;
+    this.load(this.offset);
+  }
+
+>>>>>>> Stashed changes
   private initHotPosts() {
     this._postService.getHotPosts(this.offset)
       .subscribe(posts => {

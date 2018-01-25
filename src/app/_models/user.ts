@@ -1,3 +1,4 @@
+
 /**
  * Created by srdjanstevanovic on 24/01/18.
  */
@@ -33,5 +34,6 @@ export class User implements IUser {
   createdDate: number,
   lastPasswordResetDate: number
 ) {
+
   }
 }

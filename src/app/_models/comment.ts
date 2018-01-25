@@ -40,5 +40,6 @@ export class Comment implements IComment {
   userProfileImage: string,
   userId: number
 ) {
+
   }
 }
