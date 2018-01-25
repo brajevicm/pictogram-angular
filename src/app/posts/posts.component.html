@@ -68,7 +68,7 @@
                     <ul>
                       <li class="mr-10">
                         <a *ngIf="!(isLoggedIn | async)"
-                           title="You have to be logged it to be able to upvote.">
+                           title="You have to be logged in to be able to upvote.">
                           <span class="glyphicon glyphicon-arrow-up glyphicon-not-logged"></span>
                         </a>
                         <a *ngIf="(isLoggedIn | async) && !post.upvotedPostByCurrentUser  && !post.isActivePost"
@@ -94,7 +94,7 @@
                         </a>
                         <a *ngIf="!(isLoggedIn | async)"
                            (click)="post.isActiveCommentBox = !post.isActiveCommentBox"
-                           title="You have to be logged it to be able to comment.">
+                           title="You have to be logged in to be able to comment.">
                           <span class="glyphicon glyphicon-comment glyphicon-not-logged"></span>
                         </a>
                       </li>

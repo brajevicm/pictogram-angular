@@ -460,3 +460,12 @@ body .no-padding {
 .status-upload form button > i {
   margin-right: 7px;
 }
+.container{
+
+  display: inline-grid;
+}
+.buttons{
+  align-items: center;
+  display: inline-flex;
+
+}
