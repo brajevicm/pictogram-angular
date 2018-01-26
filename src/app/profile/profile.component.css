@@ -426,7 +426,6 @@ A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themefores
 Licensed under MIT
 ***/
 .container{
-  background: #fff;
   width:100%;
 }
 
@@ -441,10 +440,10 @@ Licensed under MIT
 
 /* Profile sidebar */
 .profile-sidebar {
+  position: fixed;
   padding: 50px 0 10px 0;
   /*background: #000;*/
 }
-
 .profile-userpic img {
   float: none;
   margin: 0 auto;
@@ -535,7 +534,7 @@ Licensed under MIT
 /* Profile Content */
 .profile-content {
   padding: 20px;
-  background: #fff;
+  background-color: whitesmoke;
   min-height: 460px;
 }
 

@@ -25,6 +25,7 @@ li {
 
 img {
   border-radius: 5px;
+  margin-right: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 100%;
 }
@@ -54,14 +55,36 @@ h2 {
   color: #c22025;
 }
 h4 a{
+
   color: black;
 }
 h4 a:hover{
   color: #c22025;
 }
-header{
+
+.col-md-4{
+  padding-top: 20px;
 
 }
+
+.header1 {
+  background-color: white;
+  height: 70px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+header {
+  background-color: white;
+  padding: 16px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .upvoted {
   color: #c22025;
   cursor: default;
