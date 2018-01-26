@@ -50,6 +50,15 @@ export class PostsComponent implements OnInit {
       this.loadTrendingPosts(offset);
     } else if (path === '/fresh') {
       this.loadFreshPosts(offset);
+    } else if (path.endsWith('/posts')) {
+      const id = +path.match(/\d+/)[0];
+      this.getPostsFromUser(id, offset);
+    } else if (path.endsWith('/upvotes')) {
+      const id = +path.match(/\d+/)[0];
+      this.getUpvotedPosts(id, offset);
+    } else if (path.endsWith('/comments')) {
+      const id = +path.match(/\d+/)[0];
+      this.getPostsFromUser(id, offset);
     } else {
       this.loadHotPosts(offset);
     }
@@ -78,6 +87,60 @@ export class PostsComponent implements OnInit {
         user => this.currentUser = user,
         error => this._alertService.error(error)
       );
+  }
+  getUpvotedPosts(id: number, offset: number) {
+    this._postService.getUpvotedPosts(id, offset).subscribe(posts => {
+      posts.map(p => {
+        return {
+          id: p.id,
+          title:  p.title,
+          description: p.description,
+          postImage:   p.postImage,
+          createdDate: p.createdDate,
+          enabled:   p.enabled,
+          upvotedPostByCurrentUser:  p.upvotedPostByCurrentUser,
+          reportedPostByCurrentUser:  p.reportedPostByCurrentUser,
+          username:   p.username,
+          userId: p.userId,
+          userProfileImage: p.userProfileImage,
+          commentsCount: p.commentsCount,
+          upvotesCount:   p.upvotesCount,
+          reportsCount: p.reportsCount,
+          isActiveComment: false,
+          isActivePost: false,
+          isActiveReport: false
+
+        };
+      }).forEach(item => this.posts.push(item));
+    });
+  }
+
+    getPostsFromUser(id: number, offset: number) {
+    this._postService.getPostsFromUser(id, offset)
+      .subscribe(posts => {
+        posts.map(p => {
+          return {
+            id: p.id,
+            title:  p.title,
+            description: p.description,
+            postImage:   p.postImage,
+            createdDate: p.createdDate,
+            enabled:   p.enabled,
+            upvotedPostByCurrentUser:  p.upvotedPostByCurrentUser,
+            reportedPostByCurrentUser:  p.reportedPostByCurrentUser,
+            username:   p.username,
+            userId: p.userId,
+            userProfileImage: p.userProfileImage,
+            commentsCount: p.commentsCount,
+            upvotesCount:   p.upvotesCount,
+            reportsCount: p.reportsCount,
+            isActiveComment: false,
+            isActivePost: false,
+            isActiveReport: false
+
+          };
+        }).forEach(item => this.posts.push(item));
+      });
   }
 
   private loadHotPosts(offset: number) {
@@ -163,7 +226,6 @@ export class PostsComponent implements OnInit {
 
       });
   }
-
   private loadAllTopCommentedPosts() {
     this._postService.getTopCommentedPosts()
       .subscribe(posts => {

@@ -81,7 +81,8 @@ export class CommentService {
 
   public getCommentsFromUser(id: number): Observable<IComment[]> {
     const options = this._sharedService.getOptions();
-    const url = API_URL + USER + id + '/' + COMMENTS;
+    const offset = 0;
+    const url = API_URL + USER + id + '/' + COMMENTS + '?page=' + offset + '&size=10';
 
     return this._http.get(url, options)
       .map((response: Response) => <IComment[]> response.json().content)

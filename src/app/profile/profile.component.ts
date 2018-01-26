@@ -44,37 +44,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
           const id = +params['userid'];
           this.getUser(id);
         });
-   /*    this.getPosts();
-       this.getComments();
-      this.getUpvotedPosts();*/
     }
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
-  // @TODO
-  getPosts(id: number) {
-    this._postService.getPostsFromUser(id)
-      .map(res => res)
-      .subscribe(res => this.posts = res);
-  }
-
-  // @TODO
-  getUpvotedPosts() {
-    const id = 1; // fake id
-    this._postService.getUpvotedPosts(id)
-      .subscribe(
-        posts => this.upvotedPosts = posts,
-        error => this._alertService.error(error)
-      )
-    ;
-  }
-
   // @TODO pass proper id
-  getComments() {
-    const id = 1; // fake id
+  getComments(id: number) {
     this._commentService.getCommentsFromUser(id)
       .subscribe(
         comments => this.comments = comments,
