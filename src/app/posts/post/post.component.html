@@ -62,31 +62,44 @@
                 reports</a>
             </p>
             <div class="buttons">
+              <ul>
+                <li class="mr-10">
               <a *ngIf="!(isLoggedIn | async)" class="right glyphicon-position"
                  title="You have to be logged in to be able to upvote.">
                 <span class="glyphicon glyphicon-arrow-up glyphicon-not-logged"></span>
               </a>
+                </li>
+                <li class="mr-10">
               <a *ngIf="(isLoggedIn | async) && !post.upvotedPostByCurrentUser && !post.isActivePost" class="right glyphicon-position"
                  (click)="post.isActivePost = !post.isActivePost; upvotePost(post.id)"
                  title="Click here to upvote this post.">
                 <span class="glyphicon glyphicon-arrow-up glyphicon-custom"></span>
               </a>
+
+                </li>
+                <li class="mr-10">
               <a *ngIf="post.upvotedPostByCurrentUser || post.isActivePost" class="right glyphicon-position"
                  title="You have already upvoted this post.">
                 <span class="glyphicon glyphicon-arrow-up glyphicon-custom upvoted"></span>
               </a>
 
+                </li>
+                <li class="mr-10">
               <a *ngIf="(isLoggedIn | async) && !post.isActiveRemove && currentUser.authorities[0].authority == 'ROLE_ADMIN'"
                  class="right glyphicon-position mr-10"
                  (click)="post.isActiveRemove = !post.isActiveRemove; removePost(post.id)"
                  title="Click here to remove this post.">
                 <span class=" glyphicon glyphicon-remove glyphicon-custom"></span>
               </a>
+                </li>
+                <li class="mr-10">
               <a *ngIf="currentUser && post.isActiveRemove && currentUser.authorities[0].authority == 'ROLE_ADMIN'"
                  class="right glyphicon-position mr-10"
                  title="You have already removed this post.">
                 <span class="glyphicon glyphicon-remove glyphicon-custom upvoted"></span>
               </a>
+                </li>
+                <li class="mr-10">
 
               <a *ngIf="currentUser && !post.reportedPostByCurrentUser  && !post.isActiveReport && currentUser.authorities[0].authority == 'ROLE_USER'"
                  class="right glyphicon-position mr-10"
@@ -94,12 +107,17 @@
                  title="Click here to report this post.">
                 <span class=" glyphicon glyphicon-exclamation-sign glyphicon-custom"></span>
               </a>
+                </li>
+                <li class="mr-10">
               <a *ngIf="currentUser && (post.isActiveReport || post.reportedPostByCurrentUser) && currentUser.authorities[0].authority == 'ROLE_USER'"
 
                  class="right glyphicon-position mr-10"
                  title="You have already reported this post.">
                 <span class="glyphicon glyphicon-exclamation-sign glyphicon-custom upvoted"></span>
               </a>
+                </li>
+
+              </ul>
             </div>
               <!--<span class=" glyphicon glyphicon-arrow-up glyphicon-custom"></span>-->
 
