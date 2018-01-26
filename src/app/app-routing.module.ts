@@ -19,7 +19,7 @@ import {RegisterGuard} from './_guards/register.guard';
           children: [
             {path: 'posts', component: PostsComponent},
             {path: 'upvotes', component: PostsComponent},
-            {path: 'comments', component: PostsComponent}, //CommentsComponent
+            {path: 'comments', component: PostsComponent}, // CommentsComponent
             {path: 'settings', component: SettingsComponent}
           ]
         },

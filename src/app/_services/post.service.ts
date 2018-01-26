@@ -106,21 +106,23 @@ export class PostService {
   }
 
   // TODO edit
-  getPostsFromUser(id: number): Observable<IPost[]> {
+  getPostsFromUser(id: number, offset: number): Observable<IPost[]> {
     const options = this._sharedService.getOptions();
-    const url = API_URL + USER + id + '/' + POSTS;
+    const page = '?page=' + offset + '&size=3';
+    const url = API_URL + USER + id + '/' + POSTS + page;
 
     return this._http.get(url, options)
-      .map((response: Response) => <IPost[]> response.json().posts)
+      .map((response: Response) => <IPost[]> response.json().content)
       .catch(this._sharedService.localError);
   }
 
   // @TODO parameter query
-  getUpvotedPosts(id: number): Observable<IPost[]> {
+  getUpvotedPosts(id: number, offset: number): Observable<IPost[]> {
     const options = this._sharedService.getOptions();
-    const url = API_URL + USER + id + '/' + POSTS;
+    const page = '?page=' + offset + '&size=3';
+    const url = API_URL + USER + id + '/' + POSTS + page;
     return this._http.get(url, options)
-      .map((response: Response) => <IPost[]> response.json().posts)
+      .map((response: Response) => <IPost[]> response.json().content)
       .catch(this._sharedService.localError);
   }
 
@@ -155,13 +157,13 @@ export class PostService {
       );
   }
 
-  // @TODO http.delete instead of http.post
+  // @TODO fixed
   removePost(id: number): void {
     const data = JSON.stringify({post_id: id});
     const options = this._sharedService.getOptions();
-    const url = API_URL;
+    const url = API_URL + POST + id;
 
-    this._http.put(url, data, options)
+    this._http.delete(url, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)

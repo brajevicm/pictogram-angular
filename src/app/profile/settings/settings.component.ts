@@ -52,7 +52,7 @@ export class SettingsComponent  { currentUser: IUser;
   // @TODO
   getPosts() {
     const id = 1; // fake id
-    this._postService.getPostsFromUser(id)
+    this._postService.getPostsFromUser(id, 1)
       .map(res => res)
       .subscribe(res => this.posts = res);
   }
@@ -60,7 +60,7 @@ export class SettingsComponent  { currentUser: IUser;
   // @TODO
   getUpvotedPosts() {
     const id = 1; // fake id
-    this._postService.getUpvotedPosts(id)
+    this._postService.getUpvotedPosts(id, 0)
       .subscribe(
         posts => this.upvotedPosts = posts,
         error => this._alertService.error(error)
