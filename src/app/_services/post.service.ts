@@ -157,7 +157,7 @@ export class PostService {
       );
   }
 
-  // @TODO http.delete instead of http.post
+  // @TODO fixed
   removePost(id: number): void {
     const data = JSON.stringify({post_id: id});
     const options = this._sharedService.getOptions();

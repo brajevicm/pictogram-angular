@@ -33,9 +33,9 @@ export class CommentService {
   public upvoteComment(id: number): void {
     const data = JSON.stringify({id: id});
     const options = this._sharedService.getOptions();
-    const url = API_URL + this._upvote;
+    const url = API_URL + COMMENT + id;
 
-    this._http.post(url, data, options)
+    this._http.put(url, null, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
@@ -48,7 +48,7 @@ export class CommentService {
     const options = this._sharedService.getOptions();
     const url = API_URL + COMMENT + id;
 
-    this._http.post(url, data, options)
+    this._http.delete(url, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
@@ -60,9 +60,9 @@ export class CommentService {
   public reportComment(id: number): void {
     const data = JSON.stringify({comment_id: id});
     const options = this._sharedService.getOptions();
-    const url = API_URL + this._report;
+    const url = API_URL + COMMENT + id;
 
-    this._http.patch(url, data, options)
+    this._http.patch(url, null, options)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
