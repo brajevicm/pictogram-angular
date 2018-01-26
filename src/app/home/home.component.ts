@@ -17,7 +17,7 @@ import {AlertService} from '../_services/alert.service';
 })
 
 export class HomeComponent implements OnInit {
-  isLoggedIn: Observable<boolean>;
+  isLoggedIn: boolean;
   currentUser: IUser;
   constructor(private _userService: UserService,
               private _authService: AuthService,
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
               private _route: ActivatedRoute,
               private _title: Title,
               private _alertService: AlertService) {
-    this.isLoggedIn = this._authService.isLoggedIn();
+    this.isLoggedIn = this._sharedService.isUserLoggedIn();
   }
 ngOnInit() {
   if (this.isLoggedIn) {

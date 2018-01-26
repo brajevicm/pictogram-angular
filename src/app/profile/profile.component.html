@@ -197,11 +197,13 @@ Licensed under MIT
                 <i class="glyphicon glyphicon-comment"></i>
                 Comments </a>
             </li>
-            <li>
+            <ng-container *ngIf="currentUser">
+            <li *ngIf="currentUser.id === user.id">
               <a [routerLink]="['/profile',user.id,'settings']">
                 <i class="glyphicon glyphicon-user"></i>
                 Account Settings </a>
             </li>
+            </ng-container>
           </ul>
 
         </div>

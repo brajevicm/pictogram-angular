@@ -1,7 +1,7 @@
 <script src="posts.component.ts"></script>
 
 <div class="container">
-  <div class="container-fluid" *ngIf="(isLoggedIn | async) || !(isLoggedIn | async)">
+  <div class="container-fluid" *ngIf="(isLoggedIn ) || !(isLoggedIn )">
     <div class="row">
       <div class="col-md-12">
         <div class="col-md-7">
@@ -58,7 +58,7 @@
                   <a *ngIf="!post.isActiveComment" [routerLink]="['/post', post.id]" class="mr-10">{{post.commentsCount}}
                     ·
                     comments</a>
-                  <!--  <a *ngIf="(isLoggedIn | async) && username.role == 'admin' && post.reports > 1">{{post.reports}}
+                  <!--  <a *ngIf="(isLoggedIn ) && username.role == 'admin' && post.reports > 1">{{post.reports}}
                       ·
                       reports</a>-->
                 </header>
@@ -67,11 +67,11 @@
                   <div>
                     <ul>
                       <li class="mr-10">
-                        <a *ngIf="!(isLoggedIn | async)"
+                        <a *ngIf="!(isLoggedIn )"
                            title="You have to be logged in to be able to upvote.">
                           <span class="glyphicon glyphicon-arrow-up glyphicon-not-logged"></span>
                         </a>
-                        <a *ngIf="(isLoggedIn | async) && !post.upvotedPostByCurrentUser  && !post.isActivePost"
+                        <a *ngIf="(isLoggedIn ) && !post.upvotedPostByCurrentUser  && !post.isActivePost"
                            (click)="post.isActivePost = !post.isActivePost; upvotePost(post.id)"
                            title="Click here to upvote this post.">
                           <span class="glyphicon glyphicon-arrow-up glyphicon-custom"></span>
@@ -82,23 +82,23 @@
                         </a>
                       </li>
                       <li class="mr-10">
-                        <a *ngIf="(isLoggedIn | async) && !post.isActiveCommentBox"
+                        <a *ngIf="(isLoggedIn ) && !post.isActiveCommentBox"
                            (click)="post.isActiveCommentBox = !post.isActiveCommentBox"
                            title="Click here to comment on this post.">
                           <span class="glyphicon glyphicon-comment glyphicon-custom"></span>
                         </a>
-                        <a *ngIf="(isLoggedIn | async) && post.isActiveCommentBox"
+                        <a *ngIf="(isLoggedIn ) && post.isActiveCommentBox"
                            (click)="post.isActiveCommentBox = !post.isActiveCommentBox"
                            title="Click here to close the comment window.">
                           <span class="glyphicon glyphicon-comment glyphicon-custom upvoted"></span>
                         </a>
-                        <a *ngIf="!(isLoggedIn | async)"
+                        <a *ngIf="!(isLoggedIn )"
                            (click)="post.isActiveCommentBox = !post.isActiveCommentBox"
                            title="You have to be logged in to be able to comment.">
                           <span class="glyphicon glyphicon-comment glyphicon-not-logged"></span>
                         </a>
                       </li>
-                       <li *ngIf="(isLoggedIn | async)">
+                       <li *ngIf="(isLoggedIn )">
                          <a *ngIf="!post.isActiveRemove && currentUser.authorities[0].authority == 'ROLE_ADMIN'"
                             (click)="post.isActiveRemove = !post.isActiveRemove; removePost(post.id)"
                             title="Click here to remove this post.">
@@ -111,7 +111,7 @@
 
                        </li>
 
-                      <li *ngIf="(isLoggedIn | async)">
+                      <li *ngIf="(isLoggedIn )">
                         <a *ngIf="!post.reportedPostByCurrentUser && !post.isActiveReport "
                            (click)="post.isActiveReport = !post.isActiveReport; reportPost(post.id)"
                            title="Click here to report this post.">

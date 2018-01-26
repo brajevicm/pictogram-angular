@@ -20,7 +20,7 @@ export class PostsComponent implements OnInit {
   posts: IPost[] = [];
   topCommented: IPost[] = [];
   currentUser: IUser;
-  isLoggedIn: Observable<boolean>;
+  isLoggedIn: boolean;
   loading = false;
   commentText: string;
   offset = 0;
@@ -29,15 +29,16 @@ export class PostsComponent implements OnInit {
               private _userService: UserService,
               private _commentService: CommentService,
               private _alertService: AlertService,
-              private _authService: AuthService
+              private _authService: AuthService,
+              private _sharedService: SharedService
   ) {
-    this.isLoggedIn = this._authService.isLoggedIn();
+    this.isLoggedIn = this._sharedService.isUserLoggedIn();
   }
 
   // TODO srediti prikaz lajkovanih postova
   ngOnInit() {
     this.load(this.offset);
-    this.isLoggedIn = this._authService.isLoggedIn();
+    this.isLoggedIn = this._sharedService.isUserLoggedIn();
     if (this.isLoggedIn) {
       this.getUser();
     }
