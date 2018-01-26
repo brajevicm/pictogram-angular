@@ -159,11 +159,9 @@ export class PostService {
 
   // @TODO fixed
   removePost(id: number): void {
-    const data = JSON.stringify({post_id: id});
-    const options = this._sharedService.getOptions();
+    const headers = this._sharedService.getOptions();
     const url = API_URL + POST + id;
-
-    this._http.delete(url, options)
+    this._http.delete(url, headers)
       .map(res => res)
       .subscribe(next => next,
         err => this._sharedService.localError(err)
