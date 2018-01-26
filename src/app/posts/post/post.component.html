@@ -64,13 +64,13 @@
             <div class="buttons">
               <ul>
                 <li class="mr-10">
-              <a *ngIf="!(isLoggedIn | async)" class="right glyphicon-position"
+              <a *ngIf="!(isLoggedIn )" class="right glyphicon-position"
                  title="You have to be logged in to be able to upvote.">
                 <span class="glyphicon glyphicon-arrow-up glyphicon-not-logged"></span>
               </a>
                 </li>
                 <li class="mr-10">
-              <a *ngIf="(isLoggedIn | async) && !post.upvotedPostByCurrentUser && !post.isActivePost" class="right glyphicon-position"
+              <a *ngIf="(isLoggedIn ) && !post.upvotedPostByCurrentUser && !post.isActivePost" class="right glyphicon-position"
                  (click)="post.isActivePost = !post.isActivePost; upvotePost(post.id)"
                  title="Click here to upvote this post.">
                 <span class="glyphicon glyphicon-arrow-up glyphicon-custom"></span>
@@ -85,7 +85,7 @@
 
                 </li>
                 <li class="mr-10">
-              <a *ngIf="(isLoggedIn | async) && !post.isActiveRemove && currentUser.authorities[0].authority == 'ROLE_ADMIN'"
+              <a *ngIf="(isLoggedIn ) && !post.isActiveRemove && currentUser.authorities[0].authority == 'ROLE_ADMIN'"
                  class="right glyphicon-position mr-10"
                  (click)="post.isActiveRemove = !post.isActiveRemove; removePost(post.id)"
                  title="Click here to remove this post.">
@@ -168,11 +168,11 @@
                           </a>
                         </h6>
                         <div>
-                          <a *ngIf="!(isLoggedIn | async)" class="right glyphicon-position"
+                          <a *ngIf="!(isLoggedIn )" class="right glyphicon-position"
                              title="You have to be logged in to be able to upvote.">
                             <span class="glyphicon glyphicon-arrow-up glyphicon-not-logged"></span>
                           </a>
-                          <div *ngIf="(isLoggedIn | async) && currentUser">
+                          <div *ngIf="(isLoggedIn ) && currentUser">
                           <a *ngIf="comment.upvotedCommentByCurrentUser || comment.isActive"
                              class="right glyphicon-position"
                              title="You have already upvoted this comment.">
@@ -187,7 +187,7 @@
                         </div>
                         </div>
 
-                          <div *ngIf="(isLoggedIn | async) && currentUser">
+                          <div *ngIf="(isLoggedIn ) && currentUser">
                             <a *ngIf="!comment.isActiveRemove && currentUser.authorities[0].authority == 'ROLE_ADMIN'"
                                class="right glyphicon-position mr-10"
                                (click)="comment.isActiveRemove = !comment.isActiveRemove; removeComment(comment.id)"
@@ -201,7 +201,7 @@
                             </a>
                           </div>
 
-                          <div *ngIf="(isLoggedIn | async) && currentUser">
+                          <div *ngIf="(isLoggedIn ) && currentUser">
                             <a *ngIf="!comment.reportedCommentByCurrentUser && !comment.isActiveReport && currentUser.authorities[0].authority == 'ROLE_USER'"
                                class="right glyphicon-position mr-10"
                                (click)="comment.isActiveReport = !comment.isActiveReport; reportComment(comment.id)"
@@ -214,7 +214,7 @@
                               <span class="glyphicon glyphicon-exclamation-sign glyphicon-custom upvoted"></span>
                             </a>
                           </div>
-                          <span *ngIf="(isLoggedIn | async) && currentUser.authorities[0].authority == 'ROLE_ADMIN' && comment.reportsCount > 1"
+                          <span *ngIf="(isLoggedIn ) && currentUser.authorities[0].authority == 'ROLE_ADMIN' && comment.reportsCount > 1"
                                 class="date">{{comment.reportsCount}}
                                                     ·
                                                     reports</span>

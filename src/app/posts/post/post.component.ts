@@ -20,7 +20,7 @@ import { AuthService } from '../../_services/auth.service';
 })
 export class PostComponent implements OnInit, OnDestroy {
   currentUser: IUser;
-  isLoggedIn: Observable<boolean>;
+  isLoggedIn: boolean;
   post: IPost;
   comments: IComment[] = [];
   upvoted = false;
@@ -40,7 +40,7 @@ export class PostComponent implements OnInit, OnDestroy {
               private _alertService: AlertService,
               private _authService: AuthService,
               private _title: Title) {
-    this.isLoggedIn = this._authService.isLoggedIn();
+    this.isLoggedIn = this._sharedService.isUserLoggedIn();
   }
 
   ngOnInit() {

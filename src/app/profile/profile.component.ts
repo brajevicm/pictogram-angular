@@ -23,7 +23,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   comments: IComment[];
   posts: IPost[];
   upvotedPosts: IPost[];
-  isLoggedIn: Observable<boolean>;
+  isLoggedIn: boolean;
+  isCurrentUser: boolean;
 
   private sub: Subscription;
 
@@ -34,22 +35,25 @@ export class ProfileComponent implements OnInit, OnDestroy {
               private _sharedService: SharedService,
               private _alertService: AlertService,
               private  _authService: AuthService) {
-    this.isLoggedIn = this._authService.isLoggedIn();
+    this.isLoggedIn = this._sharedService.isUserLoggedIn();
   }
 
   ngOnInit() {
-    if (this.isLoggedIn) {
       this.sub = this._route.params
         .subscribe(params => {
           const id = +params['userid'];
           this.getUser(id);
+          if (this.isLoggedIn) {
+            this.getCurrentUser();
+          }
         });
     }
-  }
+
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
   // @TODO pass proper id
   getComments(id: number) {
     this._commentService.getCommentsFromUser(id)
@@ -60,11 +64,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ;
   }
 
-  // @TODO pass proper id
-  getUser(id: number) {
-     return this._userService.getUser(id)
-       .subscribe(result => this.user = result,
-         error => this._alertService.error(error));
+  private getCurrentUser() {
+    return this._userService.getCurrentUser()
+      .subscribe(
+        user => this.currentUser = user,
+        error => this._alertService.error(error)
+      );
   }
 
+  // @TODO pass proper id
+  getUser(id: number) {
+    return this._userService.getUser(id)
+      .subscribe(result => this.user = result,
+        error => this._alertService.error(error));
+  }
+
+
 }
+

@@ -15,12 +15,15 @@ import {AlertService} from '../../_services/alert.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent  { currentUser: IUser;
+export class SettingsComponent implements OnInit  {
+  currentUser: IUser;
   user: IUser;
   comments: IComment[];
   posts: IPost[];
+  model: any = {};
   upvotedPosts: IPost[];
   isLogged: boolean;
+  id: number;
 
   constructor(private _userService: UserService,
               private _commentService: CommentService,
@@ -30,61 +33,27 @@ export class SettingsComponent  { currentUser: IUser;
               private _alertService: AlertService,
               private  _authService: AuthService) {
     this.isLogged = this._sharedService.isUserLoggedIn();
+    const path = window.location.pathname;
+    this.id = +path.match(/\d+/)[0];
   }
 
   ngOnInit() {
-    if (this.isLogged) {
-      this.getUser();
-
-         //  this.getPosts();
-         //  this.getComments();
-         // this.getUpvotedPosts();
-    }
+      this.getUser(this.id);
   }
 
-  ngOnDestroy() {
-  }
-
-  EditAcc() {
- alert('button is working');
-  }
-
-  // @TODO
-  getPosts() {
-    const id = 1; // fake id
-    this._postService.getPostsFromUser(id, 1)
-      .map(res => res)
-      .subscribe(res => this.posts = res);
-  }
-
-  // @TODO
-  getUpvotedPosts() {
-    const id = 1; // fake id
-    this._postService.getUpvotedPosts(id, 0)
-      .subscribe(
-        posts => this.upvotedPosts = posts,
-        error => this._alertService.error(error)
-      )
-    ;
-  }
-
-  // @TODO pass proper id
-  getComments() {
-    const id = 1; // fake id
-    this._commentService.getCommentsFromUser(id)
-      .subscribe(
-        comments => this.comments = comments,
-        error => this._alertService.error(error)
-      )
-    ;
-  }
-
-  // @TODO pass proper id
-  getUser() {
-    const id = 1; // fake id
+  getUser(id: number) {
     return this._userService.getUser(id)
       .subscribe(result => this.user = result,
         error => this._alertService.error(error));
   }
+  getCurrentUser(id: number) {
+    return this._userService.getCurrentUser()
+      .subscribe(result => this.currentUser = result,
+        error => this._alertService.error(error));
+  }
 
+  updateProfile() {
+    this._userService.editUser(this.id, this.model.firstName, this.model.lastName, this.model.email, this.model.password).subscribe();
+  }
 }
+

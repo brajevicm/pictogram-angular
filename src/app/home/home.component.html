@@ -26,7 +26,7 @@
           <li (click)="setTitle('Pictogram | Fresh')" [routerLinkActive]="['underline']"><a
             [routerLink]="['/fresh']">Fresh</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" *ngIf="!(isLoggedIn | async)">
+        <ul class="nav navbar-nav navbar-right" *ngIf="!(isLoggedIn )">
           <li>
             <app-login></app-login>
           </li>
@@ -38,12 +38,16 @@
             </div>
           </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" *ngIf="(isLoggedIn | async)">
+        <ul class="nav navbar-nav navbar-right" *ngIf="(isLoggedIn )">
           <li [routerLinkActive]="['underline']">
             <a [routerLink]="['/upload']">Upload</a>
           </li>
+
           <li *ngIf="currentUser && isLoggedIn" (click)="setTitle('Pictogram | Profile')" [routerLinkActive]="['underline']">
-            <a [routerLink]="['/profile', currentUser.id]">Profile</a>
+
+            <a [routerLink]="['/profile', currentUser.id]"><strong>{{currentUser.username}}</strong>
+              <img src="{{currentUser.profileImage}}" class="imgProfile">
+            </a>
           </li>
           <li><a href="" (click)="logout()">Logout</a></li>
         </ul>

@@ -16,6 +16,7 @@
 <!--<div class="clearfix"></div>-->
 <!--</form>-->
 <!--</div>-->
+<!--
 
 <div class="space-medium">
 <div *ngIf="this.user" class="container">
@@ -26,32 +27,37 @@
         <h3 style="margin-bottom: 25px; text-align: center;">Account Settings</h3>
         <div class="form-group" name="form">
           <label>Username:</label>
-          <input type="text" class="form-control" ngModel="{{user.username}}" placeholder="{{user.username}}"  name="username" placeholder="Username"
+          <input type="text" class="form-control" ngModel="{{model.username}}" placeholder="{{user.username}}"  name="username"
                  >
         </div>
-        <!--<div class="form-group">-->
-          <!--<label>Password:</label>-->
-          <!--<input type="text" class="form-control"  name="password" ngModel="{{user.password}}"-->
-                 <!--readonly="readonly">-->
-        <!--</div>-->
+        &lt;!&ndash;<div class="form-group">&ndash;&gt;
+          &lt;!&ndash;<label>Password:</label>&ndash;&gt;
+          &lt;!&ndash;<input type="text" class="form-control"  name="password" ngModel="{{user.password}}"&ndash;&gt;
+                 &lt;!&ndash;readonly="readonly">&ndash;&gt;
+        &lt;!&ndash;</div>&ndash;&gt;
         <div class="form-group">
           <label>Firs name:</label>
-          <input type="text" class="form-control" name="firstName" placeholder="{{user.firstName}}"  ngModel="{{user.firstName}}"
+          <input type="text" class="form-control" name="firstName" placeholder="{{user.firstName}}"  ngModel="{{model.firstName}}"
                  >
         </div>
         <div class="form-group">
           <label>Last name:</label>
-          <input type="text" class="form-control" name="lastName"  placeholder="{{user.lastName}}" ngModel="{{user.lastName}}"
+          <input type="text" class="form-control" name="lastName"  placeholder="{{user.lastName}}" ngModel="{{model.lastName}}"
                  >
         </div>
         <div class="form-group">
           <label>Email:</label>
-          <input type="text" class="form-control"   name="email" ngModel="{{user.email}}"
-                placeholder="{{user.email}}">
-<br>
-<br>
-          <button type="button" id="submit" name="submit"  (click)="EditAcc()"  class="btn btn-primary pull-right">Edit</button>
+          <input type="email" class="form-control"  placeholder="{{user.email}}"  name="email" ngModel="{{model.email}}">
         </div>
+          <div class="form-group">
+            <label>Password:</label>
+            <input type="password" class="form-control"   name="password" ngModel="{{model.password}}"
+                   placeholder="Your password">
+
+            <br>
+<br>
+          <button type="button" id="submit" name="submit"  (click)="updateProfile()"  class="btn btn-primary pull-right">Edit</button>
+          </div>
 
       </form>
     </div>
@@ -59,3 +65,59 @@
 </div>
 </div>
 
+-->
+
+<hr>
+<div class="space-medium" *ngIf="user">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <h2>Edit profile</h2>
+        <form class="account-holder" name="form" (ngSubmit)="f.form.valid && updateProfile()" #f="ngForm" novalidate>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName"
+                   #firstName="ngModel"
+                   required minlength="2"
+                    placeholder="{{user.firstName}}"/>
+            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name must have
+              at least 2
+              characters.
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error': f.submitted && !lastName.valid }">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName"
+                   #lastName="ngModel"
+                   required minlength="2"
+                   placeholder="{{user.lastName}}"/>
+            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last name must have at least 2 characters.
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': f.submitted && !email.valid }">
+            <label for="email">Email</label>
+            <input id="email" type="text" class="form-control" name="email" [(ngModel)]="model.email"
+                   #email="ngModel"
+                   required minlength="2"
+                   placeholder="{{user.email}}"/>
+            <div *ngIf="f.submitted && !email.valid" class="help-block">Last name must have at least 2 characters.
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label id="password" for="password">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password"
+                   #password="ngModel"
+                   required minlength="8"/>
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password must have at least 8 characters.
+            </div>
+          </div>
+          <div class="form-group">
+            <button [disabled]="updated" (click)="updateProfile()" class="btn btn-default mr-10">Update info</button>
+            <img *ngIf="loading"
+                 src="data:postImage/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

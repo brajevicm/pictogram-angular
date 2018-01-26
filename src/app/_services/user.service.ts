@@ -19,23 +19,19 @@ export class UserService {
               private _sharedService: SharedService) {
   }
 
-  public registerUser(username: string, password: string, firstname: string, lastname: string, image: string) {
-    let data = JSON.stringify({
-      username: username,
-      password: password,
+  public editUser(id: number, firstname: string, lastname: string, email: string, password: string) {
+    const data = JSON.stringify({
       firstName: firstname,
       lastName: lastname,
-      profileImage: image
+       email: email,
+      password: password,
     });
     const options = this._sharedService.getOptions();
-    const url = API_URL + REGISTER;
+    const url = API_URL + USER + id;
 
-    return this._http.post(url, data, options)
+    return this._http.put(url, data, options)
       .map((response: Response) => {
           const user = response.json();
-          if (user && user.token) {
-            this._sharedService.setToken(JSON.stringify(user.token));
-          }
         }
       );
   }
